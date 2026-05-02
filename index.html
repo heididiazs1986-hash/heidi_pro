@@ -11,7 +11,413 @@
   <title>Heidi PRO</title>
   <style>
     :root{--bg1:#fff7fb;--bg2:#f2ecff;--card:rgba(255,255,255,.9);--text:#3a2b4b;--muted:#776586;--line:#eadcf7;--accent:#8d5cf6;--accent2:#ff86ba;--danger:#e5486d;--success:#25a96b;--warning:#f59e0b;--shadow:0 14px 34px rgba(94,64,145,.14);--radius:22px}*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);background:radial-gradient(circle at 10% 0%,rgba(255,134,186,.18),transparent 28%),radial-gradient(circle at 90% 0%,rgba(141,92,246,.18),transparent 34%),linear-gradient(180deg,var(--bg1),var(--bg2));min-height:100vh}body.dark{--bg1:#171321;--bg2:#211832;--card:rgba(38,31,52,.92);--text:#f8efff;--muted:#cbb8dc;--line:#4b3b63;--shadow:0 14px 34px rgba(0,0,0,.28)}.app{width:min(1180px,calc(100% - 22px));margin:0 auto;padding:14px 0 86px}.hero{position:sticky;top:0;z-index:20;background:rgba(255,247,251,.82);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:0 0 24px 24px;box-shadow:var(--shadow);padding:14px}body.dark .hero{background:rgba(23,19,33,.86)}.hero-top,.section-head,.btn-row{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}h1{font-size:clamp(1.35rem,4vw,2.1rem);margin:0}h2{font-size:1.08rem;margin:0 0 6px}.sub,.tiny{color:var(--muted)}.sub{font-size:.9rem}.tiny{font-size:.8rem}.grid{display:grid;grid-template-columns:1.05fr .95fr;gap:16px;margin-top:14px}.stack{display:grid;gap:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;animation:rise .35s ease}.metrics{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:14px}.metric{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px;box-shadow:var(--shadow)}.k{font-size:1.28rem;font-weight:800;margin-top:5px}.fields{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.fields.two{grid-template-columns:repeat(2,1fr)}label{display:block;font-size:.85rem;color:var(--muted);margin:8px 0 5px}input,select,textarea{width:100%;border:1px solid #dcc9ef;background:rgba(255,255,255,.96);color:#342742;border-radius:14px;padding:11px;font:inherit;outline:none}body.dark input,body.dark select,body.dark textarea{background:rgba(255,255,255,.08);color:var(--text);border-color:#5d4a77}textarea{min-height:96px;resize:vertical}button{border:0;border-radius:14px;padding:10px 13px;font:inherit;cursor:pointer;min-height:40px;transition:.16s ease}button:hover{transform:translateY(-1px)}.primary{background:linear-gradient(135deg,var(--accent),#6d44d9);color:white}.secondary{background:linear-gradient(135deg,#ffd4e7,#ffeaf4);color:#7e3559}.ghost{background:rgba(255,255,255,.86);color:var(--text);border:1px solid var(--line)}body.dark .ghost{background:rgba(255,255,255,.08)}.danger{background:#fff1f4;color:#b7365a;border:1px solid #ffd2dc}.success{background:#eefbf5;color:#147447;border:1px solid #ccefdc}.warning{background:#fff7e8;color:#8b5406;border:1px solid #fde4ae}.pill,.tag{display:inline-flex;border:1px solid var(--line);background:rgba(255,255,255,.82);border-radius:999px;padding:7px 10px;font-size:.82rem;margin:3px;color:var(--text)}body.dark .pill,body.dark .tag{background:rgba(255,255,255,.07)}.assistant{white-space:pre-wrap;line-height:1.48;background:linear-gradient(135deg,rgba(255,255,255,.94),rgba(248,241,255,.94));border:1px solid var(--line);border-radius:18px;padding:13px}body.dark .assistant{background:rgba(255,255,255,.07)}.list{display:grid;gap:9px;margin-top:10px}.item{display:flex;justify-content:space-between;gap:10px;background:rgba(255,255,255,.82);border:1px solid var(--line);border-radius:16px;padding:11px}body.dark .item{background:rgba(255,255,255,.06)}.bar{height:10px;background:#efe3fb;border-radius:999px;overflow:hidden;margin-top:8px}.bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent2),var(--accent));transition:.3s}.timer{font-size:1.35rem;font-weight:900;margin:8px 0}.screens{display:flex;gap:8px;overflow:auto;padding:8px 0}.screens button{white-space:nowrap}.screen{display:none}.screen.active{display:block}.cat{position:fixed;right:14px;bottom:72px;z-index:40;font-size:38px;filter:drop-shadow(0 8px 16px rgba(0,0,0,.22));animation:floaty 2.8s ease-in-out infinite;cursor:pointer}.cat-bubble{position:fixed;right:62px;bottom:108px;z-index:39;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:10px 12px;max-width:260px;box-shadow:var(--shadow);font-size:.88rem;display:none}.paw{position:fixed;z-index:38;pointer-events:none;font-size:19px;opacity:.0;animation:paw .9s ease forwards}.bottom-nav{position:fixed;left:50%;transform:translateX(-50%);bottom:10px;z-index:25;display:flex;gap:6px;background:rgba(255,255,255,.82);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:999px;padding:7px;backdrop-filter:blur(12px)}body.dark .bottom-nav{background:rgba(23,19,33,.85)}.bottom-nav button{font-size:.8rem;padding:8px 10px;min-height:auto}canvas{width:100%;max-height:260px;background:rgba(255,255,255,.55);border:1px solid var(--line);border-radius:18px;padding:10px}body.dark canvas{background:rgba(255,255,255,.04)}@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}@keyframes floaty{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-8px) rotate(2deg)}}@keyframes paw{0%{opacity:0;transform:scale(.6) translateY(0)}35%{opacity:.85}100%{opacity:0;transform:scale(1.1) translateY(-24px)}}@media(max-width:930px){.grid,.fields,.fields.two,.metrics{grid-template-columns:1fr}.hero{position:static;border-radius:20px}.bottom-nav{width:calc(100% - 20px);justify-content:space-around}.cat{bottom:82px}}
-  </style>
+  
+/* === HEIDI PRO v3: gatito + ahorro real === */
+#catAssistant{
+  position:fixed;
+  right:14px;
+  bottom:92px;
+  width:112px;
+  max-width:24vw;
+  z-index:9999;
+  pointer-events:none;
+  filter:drop-shadow(0 12px 20px rgba(64,48,77,.22));
+  animation:catFloat 3.2s ease-in-out infinite;
+  transition:transform .22s ease, filter .22s ease, opacity .22s ease;
+}
+@keyframes catFloat{
+  0%,100%{transform:translateY(0) scale(1)}
+  50%{transform:translateY(-7px) scale(1.02)}
+}
+#catAssistant.cat-warn{
+  transform:scale(1.08) rotate(-2deg);
+  filter:drop-shadow(0 12px 20px rgba(229,72,109,.28)) saturate(1.15);
+}
+#catAssistant.cat-good{
+  transform:scale(1.08);
+  filter:drop-shadow(0 12px 20px rgba(37,169,107,.28)) brightness(1.05);
+}
+#catAssistant.cat-sleep{
+  opacity:.82;
+  filter:grayscale(.35) drop-shadow(0 12px 20px rgba(64,48,77,.18));
+}
+.cig-counter-box,.habit-counter-box{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  background:rgba(141,92,246,.08);
+  border:1px solid var(--line, #eadcf7);
+  border-radius:20px;
+  padding:14px;
+  margin:10px 0;
+}
+.cig-number,.habit-number{
+  font-size:2.35rem;
+  font-weight:900;
+  line-height:1;
+  text-align:center;
+}
+.feedback-pill{
+  min-height:30px;
+  display:inline-flex;
+  align-items:center;
+  width:max-content;
+  max-width:100%;
+  border:1px solid var(--line, #eadcf7);
+  border-radius:999px;
+  padding:8px 12px;
+  background:rgba(255,255,255,.76);
+  color:var(--muted, #786987);
+  font-size:.92rem;
+  margin:8px 0;
+}
+.money-live{
+  font-weight:900;
+  color:var(--accent3, #6d44d9);
+}
+.tap-pop{ animation:tapPop .22s ease; }
+@keyframes tapPop{
+  0%{transform:scale(1)}
+  45%{transform:scale(.91)}
+  100%{transform:scale(1)}
+}
+.pulse-good{ animation:pulseGood .45s ease; }
+@keyframes pulseGood{
+  0%{box-shadow:0 0 0 0 rgba(37,169,107,.35)}
+  100%{box-shadow:0 0 0 14px rgba(37,169,107,0)}
+}
+.pulse-warn{ animation:pulseWarn .45s ease; }
+@keyframes pulseWarn{
+  0%{box-shadow:0 0 0 0 rgba(229,72,109,.35)}
+  100%{box-shadow:0 0 0 14px rgba(229,72,109,0)}
+}
+@media(max-width:480px){
+  #catAssistant{ width:98px; right:8px; bottom:84px; }
+}
+
+
+/* === HEIDI PRO v4: Finanzas PRO === */
+.finance-pro-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+  margin:12px 0;
+}
+.finance-kpi{
+  background:rgba(255,255,255,.82);
+  border:1px solid var(--line,#eadcf7);
+  border-radius:18px;
+  padding:12px;
+}
+.finance-kpi .label{
+  color:var(--muted,#786987);
+  font-size:.82rem;
+}
+.finance-kpi .value{
+  font-size:1.25rem;
+  font-weight:900;
+  margin-top:4px;
+}
+.expense-form{
+  display:grid;
+  grid-template-columns:1fr 1fr 1.2fr auto;
+  gap:10px;
+  align-items:end;
+  margin-top:12px;
+}
+.expense-table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0 8px;
+  margin-top:12px;
+}
+.expense-table th{
+  text-align:left;
+  font-size:.78rem;
+  color:var(--muted,#786987);
+  font-weight:700;
+}
+.expense-table td{
+  background:rgba(255,255,255,.78);
+  border-top:1px solid var(--line,#eadcf7);
+  border-bottom:1px solid var(--line,#eadcf7);
+  padding:9px;
+  font-size:.86rem;
+}
+.expense-table td:first-child{
+  border-left:1px solid var(--line,#eadcf7);
+  border-radius:13px 0 0 13px;
+}
+.expense-table td:last-child{
+  border-right:1px solid var(--line,#eadcf7);
+  border-radius:0 13px 13px 0;
+}
+.waste-card{
+  border-left:6px solid #e5486d;
+  background:linear-gradient(135deg,rgba(255,241,244,.96),rgba(255,255,255,.88));
+}
+.waste-card strong{
+  color:#b73559;
+}
+.category-pill{
+  display:inline-flex;
+  padding:5px 9px;
+  border-radius:999px;
+  background:rgba(141,92,246,.10);
+  border:1px solid var(--line,#eadcf7);
+  font-size:.78rem;
+}
+@media(max-width:760px){
+  .finance-pro-grid,.expense-form{
+    grid-template-columns:1fr;
+  }
+  .expense-table{
+    display:block;
+    overflow-x:auto;
+    white-space:nowrap;
+  }
+}
+
+
+/* === HEIDI PRO v5: UI por pantallas, alto contraste, gatito dinámico === */
+:root{
+  --bg-1:#f6f4fb !important;
+  --bg-2:#ece7f6 !important;
+  --card:#ffffff !important;
+  --line:#d9cbed !important;
+  --text:#2f2440 !important;
+  --muted:#675a77 !important;
+  --accent:#7c4df0 !important;
+  --accent2:#32b48a !important;
+  --accent3:#5634c8 !important;
+  --danger:#d93b63 !important;
+  --warning:#f59e0b !important;
+}
+body{
+  background:
+    radial-gradient(circle at top right, rgba(124,77,240,.13), transparent 30%),
+    linear-gradient(180deg,#f6f4fb,#ece7f6) !important;
+  padding-bottom:92px !important;
+}
+.app{
+  width:min(1040px,calc(100% - 20px)) !important;
+  padding-top:10px !important;
+}
+.hero{
+  position:sticky !important;
+  top:0 !important;
+  border-radius:0 0 24px 24px !important;
+  background:rgba(246,244,251,.92) !important;
+}
+.hero h1{font-size:clamp(1.45rem,4.5vw,2.2rem) !important}
+.subtitle{font-size:1rem !important}
+.pill-row{gap:8px !important}
+.pill{
+  font-size:.94rem !important;
+  padding:10px 13px !important;
+}
+.metrics{
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:12px !important;
+}
+.metric{
+  min-height:96px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.metric .tiny{font-size:.95rem !important}
+.metric .k{font-size:1.8rem !important}
+.layout{
+  display:block !important;
+}
+.stack{
+  display:block !important;
+}
+.life-screen{
+  display:none !important;
+  animation:screenIn .22s ease both;
+}
+.life-screen.active{
+  display:block !important;
+}
+.life-screen .card{
+  margin-bottom:16px !important;
+}
+@keyframes screenIn{
+  from{opacity:0; transform:translateY(10px)}
+  to{opacity:1; transform:translateY(0)}
+}
+.screen-title-card{
+  background:linear-gradient(135deg,#ffffff,#f2eefc) !important;
+  border:1px solid var(--line) !important;
+  border-radius:26px !important;
+  padding:18px !important;
+  margin-bottom:14px !important;
+  box-shadow:0 14px 34px rgba(79,52,126,.12);
+}
+.screen-title-card h2{
+  font-size:1.55rem !important;
+}
+.screen-title-card p{
+  margin:6px 0 0;
+  color:var(--muted);
+}
+.card{
+  border-radius:26px !important;
+  padding:18px !important;
+  box-shadow:0 12px 30px rgba(79,52,126,.10) !important;
+}
+.card h2{
+  font-size:1.32rem !important;
+}
+.sub{
+  font-size:1rem !important;
+}
+label{
+  font-size:1rem !important;
+  color:#584a69 !important;
+}
+input,select,textarea{
+  min-height:52px !important;
+  font-size:1.08rem !important;
+  border-radius:18px !important;
+}
+button{
+  min-height:52px !important;
+  font-size:1.05rem !important;
+  border-radius:18px !important;
+  padding:12px 16px !important;
+}
+.primary{
+  background:linear-gradient(135deg,#7c4df0,#5634c8) !important;
+}
+.secondary{
+  background:#eaf8f3 !important;
+  color:#087252 !important;
+  border:1px solid #bfe8d9 !important;
+}
+.ghost{
+  background:#fff !important;
+}
+.danger{
+  background:#fff0f3 !important;
+  color:#a92d4f !important;
+}
+.assistant-box{
+  font-size:1.02rem !important;
+  border-radius:20px !important;
+  background:#fbfaff !important;
+}
+.btn-row{
+  gap:12px !important;
+}
+.grid-2,.grid-3,.grid-4,.finance-pro-grid,.expense-form{
+  grid-template-columns:1fr !important;
+}
+.bottom-nav{
+  position:fixed;
+  left:50%;
+  bottom:10px;
+  transform:translateX(-50%);
+  width:min(720px,calc(100% - 20px));
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:7px;
+  background:rgba(255,255,255,.94);
+  border:1px solid var(--line);
+  border-radius:28px;
+  box-shadow:0 16px 36px rgba(79,52,126,.22);
+  padding:8px;
+  z-index:9998;
+  backdrop-filter:blur(14px);
+}
+.bottom-nav button{
+  min-height:62px !important;
+  padding:7px 4px !important;
+  border-radius:22px !important;
+  background:#f4f1fa !important;
+  border:1px solid transparent !important;
+  font-size:.78rem !important;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  align-items:center;
+  justify-content:center;
+  color:#38294d !important;
+}
+.bottom-nav button .nav-icon{
+  font-size:1.75rem;
+  line-height:1;
+}
+.bottom-nav button.active{
+  background:linear-gradient(135deg,#7c4df0,#5634c8) !important;
+  color:#fff !important;
+  box-shadow:0 10px 20px rgba(124,77,240,.28);
+}
+.nav-mini{
+  display:none !important;
+}
+#catAssistant{
+  width:138px !important;
+  max-width:34vw !important;
+  right:10px !important;
+  bottom:88px !important;
+  cursor:pointer;
+  pointer-events:auto !important;
+  transition:all .35s ease !important;
+}
+#catAssistant.cat-roam-1{right:10px; bottom:88px}
+#catAssistant.cat-roam-2{right:auto !important; left:12px !important; bottom:120px !important}
+#catAssistant.cat-roam-3{right:18px !important; bottom:48vh !important}
+#catAssistant.cat-roam-4{right:auto !important; left:16px !important; bottom:42vh !important}
+.cat-paw{
+  position:fixed;
+  z-index:9997;
+  font-size:1.65rem;
+  opacity:0;
+  pointer-events:none;
+  animation:pawWalk 1.15s ease-out forwards;
+  filter:drop-shadow(0 6px 10px rgba(60,45,80,.18));
+}
+@keyframes pawWalk{
+  0%{opacity:0; transform:translateY(10px) scale(.75) rotate(-12deg)}
+  18%{opacity:.95}
+  100%{opacity:0; transform:translateY(-28px) scale(1.15) rotate(12deg)}
+}
+.cig-number,.habit-number{
+  font-size:3rem !important;
+}
+.finance-kpi .value{
+  font-size:1.55rem !important;
+}
+.expense-table td,.expense-table th{
+  font-size:1rem !important;
+}
+@media(max-width:480px){
+  .app{width:calc(100% - 18px) !important}
+  .metrics{grid-template-columns:1fr !important}
+  .bottom-nav{
+    grid-template-columns:repeat(6,1fr);
+    width:calc(100% - 12px);
+    bottom:6px;
+    padding:6px;
+  }
+  .bottom-nav button{
+    min-height:58px !important;
+    font-size:.68rem !important;
+  }
+  .bottom-nav button .nav-icon{
+    font-size:1.55rem;
+  }
+  #catAssistant{
+    width:122px !important;
+    bottom:82px !important;
+  }
+}
+
+</style>
 </head>
 <body>
 <div class="app">
@@ -30,7 +436,111 @@
       <section class="screen" id="screen-estudio"><div class="card"><h2>💻 Estudio: programación</h2><div class="fields"><input id="studyTopic" placeholder="Tema"><input id="studyMinutes" type="number" min="0" placeholder="Min"><select id="studyLevel"><option>Bien</option><option>Medio</option><option>No entendí</option></select><select id="studySource"><option>YouTube</option><option>Curso</option><option>Práctica app</option><option>Lectura</option></select></div><textarea id="studyNote" placeholder="Qué aprendí y qué practicaré mañana"></textarea><button class="primary" onclick="saveStudy()">Guardar estudio</button><div class="assistant" style="margin-top:10px">Busca en YouTube: midudev, Fazt, HolaMundo, freeCodeCamp Español. Ruta: lógica → HTML/CSS → JavaScript → mejoras de tu propia app.</div></div></section>
     </div>
     <div class="stack"><section class="screen active" id="screen-datos"><div class="card"><div class="section-head"><div><h2>📊 Dashboard</h2><div class="sub">Vista tipo Power BI sencilla.</div></div><button class="ghost" onclick="drawChart()">Actualizar</button></div><canvas id="chart" width="900" height="300"></canvas><div class="assistant" id="dashBox" style="margin-top:10px"></div></div></section><section class="card"><h2>🪞 Asistente del día</h2><div class="assistant" id="coachBox"></div><button class="primary" onclick="coach()" style="margin-top:10px">Dame guía para hoy</button></section><section class="card"><h2>☁️ Respaldo para Drive</h2><div class="assistant">Exporta JSON y CSV. Súbelos a Drive en: GS_Vida_Heidi / JSON y CSV_Dashboard. Luego podemos automatizar Drive con OAuth.</div></section></div>
-  </main>
+  <section class="card money" id="financeCard">
+        <div class="section-head">
+          <div>
+            <h2>💰 Dinero real y título</h2>
+            <div class="sub">Control mensual: salario, gastos, deudas, ahorro, saldo y dinero desperdiciado.</div>
+          </div>
+          <button class="primary" onclick="saveFinancePro()">Guardar salario/meta</button>
+        </div>
+
+        <div class="grid-3">
+          <div>
+            <label>Salario / ingreso del mes</label>
+            <input id="income" type="number" min="0" placeholder="0" oninput="saveFinancePro(false)">
+          </div>
+          <div>
+            <label>Meta título / universidad</label>
+            <input id="degreeGoal" type="number" min="0" placeholder="10000000" oninput="saveFinancePro(false)">
+          </div>
+          <div>
+            <label>Ahorrado título</label>
+            <input id="degreeSaved" type="number" min="0" placeholder="0" oninput="saveFinancePro(false)">
+          </div>
+        </div>
+
+        <div class="finance-pro-grid">
+          <div class="finance-kpi">
+            <div class="label">Ingreso mes</div>
+            <div class="value" id="kpiIncome">$0</div>
+          </div>
+          <div class="finance-kpi">
+            <div class="label">Gastado registrado</div>
+            <div class="value" id="kpiExpenses">$0</div>
+          </div>
+          <div class="finance-kpi">
+            <div class="label">Saldo disponible</div>
+            <div class="value" id="kpiAvailable">$0</div>
+          </div>
+          <div class="finance-kpi">
+            <div class="label">Avance título</div>
+            <div class="value" id="kpiDegree">0%</div>
+          </div>
+        </div>
+
+        <div class="assistant-box waste-card">
+          <strong>Dinero desperdiciado en alcohol/tabaco:</strong>
+          <span class="money-live" id="wastedMoneyLive">$0</span>.
+          <br>
+          <span id="wasteMessage">Aquí veremos cuánto dinero se fue en consumo, sin insultos, pero sin maquillaje.</span>
+        </div>
+
+        <h3 style="margin-top:14px">➕ Registrar gasto o ahorro</h3>
+        <div class="expense-form">
+          <div>
+            <label>Categoría</label>
+            <select id="expenseCategory">
+              <option>Mercado</option>
+              <option>Arriendo</option>
+              <option>Servicios</option>
+              <option>Transporte</option>
+              <option>Deudas</option>
+              <option>Ahorro</option>
+              <option>Alcohol</option>
+              <option>Tabaco</option>
+              <option>Salud</option>
+              <option>Estudio</option>
+              <option>Casa</option>
+              <option>Otro</option>
+            </select>
+          </div>
+          <div>
+            <label>Valor</label>
+            <input id="expenseAmount" type="number" min="0" placeholder="0">
+          </div>
+          <div>
+            <label>Descripción</label>
+            <input id="expenseDescription" placeholder="Ej. mercado frutas, pago préstamo, bolsillo Davivienda">
+          </div>
+          <button class="primary" onclick="addExpense()">Agregar</button>
+        </div>
+
+        <div class="btn-row" style="margin-top:10px">
+          <button class="success" onclick="quickAddSavedToDegree()">Pasar ahorro al título</button>
+          <button class="ghost" onclick="financeAdvice()">Recomendación segura</button>
+          <button class="secondary" onclick="exportExpensesCSV()">Exportar gastos CSV</button>
+        </div>
+
+        <div class="assistant-box" id="financeSummary" style="margin-top:12px"></div>
+        <div class="bar"><span id="degreeBar"></span></div>
+
+        <table class="expense-table">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Categoría</th>
+              <th>Descripción</th>
+              <th>Valor</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="expenseList">
+            <tr><td colspan="5">Sin gastos registrados.</td></tr>
+          </tbody>
+        </table>
+      </section>
+</main>
 </div>
 <div class="cat-bubble" id="catBubble">Miau-operación control: una cosa a la vez.</div><div class="cat" id="cat" onclick="catSpeak()">🐱</div><nav class="bottom-nav"><button onclick="showScreen('vida')">🏠</button><button onclick="showScreen('alcohol')">🚨</button><button onclick="showScreen('dinero')">💰</button><button onclick="showScreen('cuerpo')">🧘</button><button onclick="showScreen('estudio')">💻</button><button onclick="showScreen('datos')">📊</button></nav>
 <script>
@@ -48,5 +558,404 @@ function drawChart(){let c=document.getElementById('chart');if(!c)return;let ctx
 function exportJSON(){dl(new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),`HEIDI_PRO_${T()}.json`)}function exportCSV(){let rows=[['fecha','cigarrillos','alcohol','agua','movimiento','estudio_min','recuperado','ahorro_titulo']];Object.keys(state.records).sort().forEach(k=>{let r=state.records[k];rows.push([k,r.habits.cigs,r.habits.alcohol,r.water,r.move.done?'Sí':'No',r.study.minutes,r.finance.recovered,r.finance.degreeSaved])});dl(new Blob([rows.map(r=>r.map(x=>'"'+String(x).replaceAll('"','""')+'"').join(',')).join('\n')],{type:'text/csv'}),`HEIDI_DASHBOARD_${T()}.csv`)}function dl(blob,name){let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();URL.revokeObjectURL(a.href)}function resetAll(){if(confirm('Borrar datos de este navegador?')){localStorage.removeItem(KEY);state=load();save()}}function toggleDark(){state.dark=!state.dark;save()}function cat(mode){let faces={serio:'😾',bien:'😺',dinero:'😸',estudio:'😼',arranque:'🐱'};document.getElementById('cat').textContent=faces[mode]||'🐱';catSpeak()}function catSpeak(){let msgs=['Una cosa a la vez.','No negocies con el impulso.','Ese peso recuperado va al título.','Pijama permitido, excusa no.','Hoy manda Heidi, no el caos.'];let b=document.getElementById('catBubble');b.textContent=msgs[Math.floor(Math.random()*msgs.length)];b.style.display='block';setTimeout(()=>b.style.display='none',2600);paw()}function paw(){for(let i=0;i<5;i++){setTimeout(()=>{let p=document.createElement('div');p.className='paw';p.textContent='🐾';p.style.left=(20+Math.random()*70)+'vw';p.style.top=(55+Math.random()*35)+'vh';document.body.appendChild(p);setTimeout(()=>p.remove(),1000)},i*110)}}
 if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js',{scope:'./'}).then(()=>console.log('SW listo')).catch(console.error))}render();tickUrge();
 </script>
+<img src="gatito.png" id="catAssistant" alt="Gatito asistente">
+
+<script>
+/* === HEIDI PRO v3: ahorro real + gatito grande === */
+(function(){
+  const $ = (id) => document.getElementById(id);
+  const money = (n) => new Intl.NumberFormat("es-CO",{style:"currency",currency:"COP",maximumFractionDigits:0}).format(Number(n||0));
+
+  window.updateCatFace = function(mode){
+    const cat = $("catAssistant");
+    if(!cat) return;
+    cat.classList.remove("cat-warn","cat-good","cat-sleep");
+    if(mode === "warn") cat.classList.add("cat-warn");
+    if(mode === "good") cat.classList.add("cat-good");
+    if(mode === "sleep") cat.classList.add("cat-sleep");
+  };
+
+  function currentDay(){
+    if(typeof day === "function") return day();
+    if(window.state && typeof todayKey === "function"){
+      if(!state.records) state.records = {};
+      if(!state.records[todayKey()]) state.records[todayKey()] = {};
+      return state.records[todayKey()];
+    }
+    window.state = window.state || {};
+    state.records = state.records || {};
+    const k = new Date().toISOString().slice(0,10);
+    state.records[k] = state.records[k] || {};
+    return state.records[k];
+  }
+
+  function ensureModel(){
+    const d = currentDay();
+    d.habits = d.habits || {};
+    d.finance = d.finance || {};
+    d.habits.cigs = Number(d.habits.cigs || 0);
+    d.habits.costPerCig = Number(d.habits.costPerCig || 1200);
+    d.habits.cigDailyBudget = Number(d.habits.cigDailyBudget || d.habits.cigBudget || 10000);
+    d.habits.alcoholTypicalSpend = Number(d.habits.alcoholTypicalSpend || 40000);
+    d.habits.alcoholSpend = Number(d.habits.alcoholSpend || 0);
+    d.habits.alcohol = d.habits.alcohol || "No";
+    return d;
+  }
+
+  window.calculateRecovered = function(){
+    const d = ensureModel();
+
+    const cigRealSpend = Math.max(0, Number(d.habits.cigs || 0) * Number(d.habits.costPerCig || 0));
+    const cigRecovered = Math.max(0, Number(d.habits.cigDailyBudget || 0) - cigRealSpend);
+
+    const alcoholTypical = Math.max(0, Number(d.habits.alcoholTypicalSpend || 0));
+    const alcoholReal = d.habits.alcohol === "Sí" ? Math.max(0, Number(d.habits.alcoholSpend || 0)) : 0;
+    const alcoholRecovered = Math.max(0, alcoholTypical - alcoholReal);
+
+    d.finance.cigRealSpend = cigRealSpend;
+    d.finance.cigRecovered = cigRecovered;
+    d.finance.alcoholRecovered = alcoholRecovered;
+    d.finance.recovered = cigRecovered + alcoholRecovered;
+
+    const cigMoney = $("cigMoneyLive");
+    if(cigMoney) cigMoney.textContent = money(cigRecovered);
+
+    const alcoholMoney = $("alcoholMoneyLive");
+    if(alcoholMoney) alcoholMoney.textContent = money(alcoholRecovered);
+
+    const totalMoney = $("recoveredMoneyLive");
+    if(totalMoney) totalMoney.textContent = money(d.finance.recovered);
+
+    return d.finance.recovered;
+  };
+
+  function saveAndRender(){
+    calculateRecovered();
+    if(typeof saveState === "function") saveState();
+    else if(window.state) localStorage.setItem("heidi_mejor_version_PRO_v3", JSON.stringify(window.state));
+  }
+
+  window.changeCigs = function(delta, btn){
+    const d = ensureModel();
+    const before = Number(d.habits.cigs || 0);
+    const next = Math.max(0, before + Number(delta || 0));
+    d.habits.cigs = next;
+    calculateRecovered();
+
+    if(btn){
+      btn.classList.remove("tap-pop");
+      void btn.offsetWidth;
+      btn.classList.add("tap-pop");
+    }
+
+    const box = $("cigCounterBox") || $("cigCard");
+    if(box){
+      box.classList.remove("pulse-good","pulse-warn");
+      void box.offsetWidth;
+      box.classList.add(delta > 0 ? "pulse-warn" : "pulse-good");
+    }
+
+    const cigsValue = $("cigsValue");
+    if(cigsValue) cigsValue.textContent = next;
+
+    const feedback = $("cigFeedback");
+    if(feedback){
+      const spent = Number(d.finance.cigRealSpend || 0);
+      const saved = Number(d.finance.cigRecovered || 0);
+      if(delta > 0){
+        feedback.textContent = `Registrado: ${next}. Gastado aprox. ${money(spent)}. Recuperado frente a tu gasto habitual: ${money(saved)}.`;
+      }else if(before === 0){
+        feedback.textContent = "Ya estás en cero. Aquí no inventamos consumos negativos.";
+      }else{
+        feedback.textContent = `Ajustado: ${next}. Recuperado actualizado: ${money(saved)}. Bien, registro exacto.`;
+      }
+    }
+
+    updateCatFace(delta > 0 ? "warn" : "good");
+    saveAndRender();
+  };
+
+  window.saveCigConfig = function(showMsg=true){
+    const d = ensureModel();
+    const cost = $("costPerCig");
+    const budget = $("cigDailyBudget") || $("cigBudget") || $("habitualCigSpend");
+    const goal = $("cigGoal");
+
+    if(cost) d.habits.costPerCig = Number(cost.value || 0);
+    if(budget) d.habits.cigDailyBudget = Number(budget.value || 0);
+    else if(goal && !d.habits.cigDailyBudget) d.habits.cigDailyBudget = Number(goal.value || 0) * Number(d.habits.costPerCig || 0);
+
+    calculateRecovered();
+
+    const feedback = $("cigFeedback");
+    if(showMsg && feedback){
+      feedback.textContent = `Base guardada: gasto habitual ${money(d.habits.cigDailyBudget)} y costo por cigarrillo ${money(d.habits.costPerCig)}.`;
+    }
+    saveAndRender();
+  };
+
+  window.saveAlcohol = function(){
+    const d = ensureModel();
+    const alcoholToday = $("alcoholToday");
+    const alcoholSpend = $("alcoholSpend");
+    const alcoholTypical = $("alcoholTypicalSpend") || $("habitualAlcoholSpend");
+
+    if(alcoholToday) d.habits.alcohol = alcoholToday.value;
+    if(alcoholSpend) d.habits.alcoholSpend = Number(alcoholSpend.value || 0);
+    if(alcoholTypical) d.habits.alcoholTypicalSpend = Number(alcoholTypical.value || 0);
+
+    calculateRecovered();
+
+    const feedback = $("alcoholFeedback");
+    if(feedback){
+      const saved = Number(d.finance.alcoholRecovered || 0);
+      if(d.habits.alcohol === "Sí"){
+        feedback.textContent = saved > 0
+          ? `Hoy tomaste, pero redujiste gasto: recuperaste ${money(saved)} frente a tu patrón habitual. Eso también es avance.`
+          : "Hoy no hubo ahorro frente al patrón habitual. No lo maquilles: registra, corta la cadena y vuelve al plan.";
+      }else{
+        feedback.textContent = `Hoy no tomaste. Recuperado frente a tu gasto típico: ${money(saved)}. Protege esa victoria.`;
+      }
+    }
+
+    updateCatFace(d.habits.alcohol === "Sí" ? "warn" : "good");
+    saveAndRender();
+  };
+
+  function addCigBudgetUI(){
+    const cost = $("costPerCig");
+    if(!cost || $("cigDailyBudget")) return;
+    const wrap = document.createElement("div");
+    wrap.innerHTML = `
+      <label>Gasto habitual diario en cigarrillo</label>
+      <input id="cigDailyBudget" type="number" min="0" placeholder="10000" oninput="saveCigConfig(false)">
+    `;
+    cost.closest("div")?.parentElement?.prepend(wrap);
+  }
+
+  function addAlcoholBudgetUI(){
+    const alcoholSpend = $("alcoholSpend");
+    if(!alcoholSpend || $("alcoholTypicalSpend")) return;
+    const wrap = document.createElement("div");
+    wrap.innerHTML = `
+      <label>Gasto típico cuando bebo</label>
+      <input id="alcoholTypicalSpend" type="number" min="0" placeholder="40000" oninput="saveAlcohol()">
+    `;
+    alcoholSpend.closest("div")?.parentElement?.prepend(wrap);
+
+    const feedback = document.createElement("div");
+    feedback.id = "alcoholFeedback";
+    feedback.className = "feedback-pill";
+    feedback.textContent = "La reducción también cuenta. No todo es blanco o negro.";
+    alcoholSpend.closest("section")?.appendChild(feedback);
+
+    const moneyBox = document.createElement("div");
+    moneyBox.className = "assistant-box";
+    moneyBox.innerHTML = `Ahorro/reducción por alcohol hoy: <span class="money-live" id="alcoholMoneyLive">$0</span>.`;
+    alcoholSpend.closest("section")?.appendChild(moneyBox);
+  }
+
+  function enhanceCigUI(){
+    const section = $("cigCard") || [...document.querySelectorAll("section")].find(s => s.textContent.includes("Cigarrillo"));
+    if(!section || $("cigFeedback")) return;
+
+    section.id = section.id || "cigCard";
+
+    const cigsValue = $("cigsValue");
+    if(cigsValue) cigsValue.classList.add("cig-number");
+
+    const buttons = [...section.querySelectorAll("button")];
+    buttons.forEach(btn => {
+      if(btn.textContent.trim() === "+1") btn.setAttribute("onclick","changeCigs(1,this)");
+      if(btn.textContent.trim() === "-1") btn.setAttribute("onclick","changeCigs(-1,this)");
+    });
+
+    const feedback = document.createElement("div");
+    feedback.id = "cigFeedback";
+    feedback.className = "feedback-pill";
+    feedback.textContent = "Listo para registrar. Cada toque recalcula tu ahorro real.";
+    section.appendChild(feedback);
+
+    const moneyBox = document.createElement("div");
+    moneyBox.className = "assistant-box";
+    moneyBox.innerHTML = `Ahorro/reducción por cigarrillo hoy: <span class="money-live" id="cigMoneyLive">$0</span>.`;
+    section.appendChild(moneyBox);
+  }
+
+  function hydrateInputs(){
+    const d = ensureModel();
+    if($("cigDailyBudget")) $("cigDailyBudget").value = d.habits.cigDailyBudget || "";
+    if($("costPerCig")) $("costPerCig").value = d.habits.costPerCig || "";
+    if($("alcoholTypicalSpend")) $("alcoholTypicalSpend").value = d.habits.alcoholTypicalSpend || "";
+    if($("alcoholSpend")) $("alcoholSpend").value = d.habits.alcoholSpend || "";
+    if($("alcoholToday")) $("alcoholToday").value = d.habits.alcohol || "No";
+    calculateRecovered();
+  }
+
+  window.addEventListener("load", () => {
+    addCigBudgetUI();
+    addAlcoholBudgetUI();
+    enhanceCigUI();
+    hydrateInputs();
+    calculateRecovered();
+  });
+})();
+</script>
+
+
+<script>
+/* === HEIDI PRO v5: pantallas tipo app + huellitas + gatito móvil === */
+(function(){
+  const screens = [
+    {id:"home", label:"Inicio", icon:"🏠", match:["Inicio del día","Asistente del día","Cierre del día"]},
+    {id:"habits", label:"Hábitos", icon:"🚨", match:["Alcohol","Cigarrillo"]},
+    {id:"money", label:"Dinero", icon:"💰", match:["Dinero real","Registrar gasto","finanzas"]},
+    {id:"body", label:"Cuerpo", icon:"🧘", match:["Movimiento","Alimentación","bienestar"]},
+    {id:"study", label:"Estudio", icon:"💻", match:["Estudio"]},
+    {id:"dash", label:"Panel", icon:"📊", match:["Dashboard","Tareas personales","Trabajo","Diario","Respaldo"]},
+  ];
+
+  function textOf(el){ return (el?.textContent || "").toLowerCase(); }
+
+  function createTitle(id){
+    const data = screens.find(s => s.id === id);
+    const div = document.createElement("div");
+    div.className = "screen-title-card";
+    const subtitles = {
+      home:"Arranque, guía y cierre. Aquí decides cómo se gobierna el día.",
+      habits:"Alcohol y cigarrillo con registro honesto, firmeza y avance real.",
+      money:"Salario, gastos, deudas, ahorros, desperdicio y meta del título.",
+      body:"Ejercicio en casa, respiración, alimentación y bienestar práctico.",
+      study:"Programación, práctica diaria y seguimiento de avance.",
+      dash:"Vista general, tareas, trabajo, diario y respaldos."
+    };
+    div.innerHTML = `<h2>${data.icon} ${data.label}</h2><p>${subtitles[id] || ""}</p>`;
+    return div;
+  }
+
+  function buildScreens(){
+    if(document.querySelector(".life-screen")) return;
+
+    const main = document.querySelector("main") || document.querySelector(".layout");
+    if(!main) return;
+
+    const allCards = [...main.querySelectorAll("section.card, div.footer-note")];
+    const holder = document.createElement("div");
+    holder.id = "screenHolder";
+
+    const screenEls = {};
+    screens.forEach((s, i) => {
+      const el = document.createElement("div");
+      el.id = "screen-" + s.id;
+      el.className = "life-screen" + (i === 0 ? " active" : "");
+      el.appendChild(createTitle(s.id));
+      screenEls[s.id] = el;
+      holder.appendChild(el);
+    });
+
+    allCards.forEach(card => {
+      const tx = textOf(card);
+      let target = "dash";
+      for(const s of screens){
+        if(s.match.some(m => tx.includes(m.toLowerCase()))){
+          target = s.id;
+          break;
+        }
+      }
+      screenEls[target].appendChild(card);
+    });
+
+    main.innerHTML = "";
+    main.appendChild(holder);
+  }
+
+  function buildBottomNav(){
+    if(document.querySelector(".bottom-nav")) return;
+    const nav = document.createElement("nav");
+    nav.className = "bottom-nav";
+    nav.innerHTML = screens.map((s, i) => `
+      <button class="${i===0 ? "active" : ""}" data-screen="${s.id}" onclick="showLifeScreen('${s.id}', this)">
+        <span class="nav-icon">${s.icon}</span>
+        <span>${s.label}</span>
+      </button>
+    `).join("");
+    document.body.appendChild(nav);
+  }
+
+  window.showLifeScreen = function(id, btn){
+    document.querySelectorAll(".life-screen").forEach(el => el.classList.remove("active"));
+    const screen = document.getElementById("screen-" + id);
+    if(screen) screen.classList.add("active");
+
+    document.querySelectorAll(".bottom-nav button").forEach(b => b.classList.remove("active"));
+    const navBtn = btn || document.querySelector(`.bottom-nav button[data-screen="${id}"]`);
+    if(navBtn) navBtn.classList.add("active");
+
+    spawnPaws();
+    roamCat();
+    window.scrollTo({top:0, behavior:"smooth"});
+
+    if(typeof drawCharts === "function"){
+      setTimeout(() => { try{ drawCharts(); }catch(e){} }, 240);
+    }
+  };
+
+  window.spawnPaws = function(){
+    const count = 5;
+    for(let i=0;i<count;i++){
+      setTimeout(() => {
+        const paw = document.createElement("div");
+        paw.className = "cat-paw";
+        paw.textContent = "🐾";
+        const baseX = 18 + Math.random() * 64;
+        const baseY = 22 + Math.random() * 56;
+        paw.style.left = baseX + "vw";
+        paw.style.top = baseY + "vh";
+        document.body.appendChild(paw);
+        setTimeout(() => paw.remove(), 1300);
+      }, i*120);
+    }
+  };
+
+  window.roamCat = function(){
+    const cat = document.getElementById("catAssistant");
+    if(!cat) return;
+    cat.classList.remove("cat-roam-1","cat-roam-2","cat-roam-3","cat-roam-4");
+    const pos = 1 + Math.floor(Math.random()*4);
+    cat.classList.add("cat-roam-" + pos);
+  };
+
+  function makeCatInteractive(){
+    const cat = document.getElementById("catAssistant");
+    if(!cat || cat.dataset.ready === "1") return;
+    cat.dataset.ready = "1";
+    cat.title = "Gatito asistente";
+    cat.addEventListener("click", () => {
+      spawnPaws();
+      if(typeof generateCoachMessage === "function") {
+        try{ generateCoachMessage(); }catch(e){}
+      }
+      cat.classList.add("cat-good");
+      setTimeout(() => cat.classList.remove("cat-good"), 900);
+    });
+  }
+
+  function simplifyHero(){
+    const subtitle = document.querySelector(".subtitle");
+    if(subtitle){
+      subtitle.textContent = "Tu centro de control personal: hábitos, dinero, cuerpo, estudio y vida diaria.";
+    }
+  }
+
+  window.addEventListener("load", () => {
+    buildScreens();
+    buildBottomNav();
+    makeCatInteractive();
+    simplifyHero();
+    setTimeout(spawnPaws, 600);
+  });
+})();
+</script>
+
 </body>
 </html>

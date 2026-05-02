@@ -1,8 +1,8 @@
-const CACHE_NAME = "heidi-pro-pwa-real-v4";
+const CACHE_NAME = "heidi-pro-v6-ui-pantallas-gatito";
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./manifest.json",
+  "./manifest.json","./gatito.png",
   "./icon-180.png",
   "./icon-192.png",
   "./icon-512.png"

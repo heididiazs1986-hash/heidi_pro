@@ -2,7 +2,7 @@
   "name": "Heidi en mejor versión PRO",
   "short_name": "Heidi PRO",
   "id": "/",
-  "start_url": "./index.html",
+  "start_url": "./index.html?v=6-ui-pantallas",
   "scope": "./",
   "display": "standalone",
   "display_override": [
@@ -10,9 +10,9 @@
     "minimal-ui"
   ],
   "orientation": "portrait",
-  "background_color": "#fff7fb",
-  "theme_color": "#8d5cf6",
-  "description": "App personal para hábitos, alcohol, cigarrillo, finanzas, estudio, ejercicio y bienestar.",
+  "background_color": "#f6f4fb",
+  "theme_color": "#7c4df0",
+  "description": "App personal por pantallas para hábitos, dinero, cuerpo, estudio y vida diaria.",
   "icons": [
     {
       "src": "./icon-180.png",
