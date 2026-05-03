@@ -28,7 +28,6 @@
       <h2>Inicio</h2>
       <p>Tu centro de control personal. Elige qué quieres trabajar hoy.</p>
     </div>
-
     <article class="hero-card">
       <div>
         <h3 id="homeHeroTitle">Tu mejora se construye en pequeño</h3>
@@ -65,7 +64,6 @@
       <div class="button-row"><button class="btn" id="saveAlcoholBtn">Guardar consumo</button><button class="btn danger" id="urgeBtn">Tengo ganas de tomar</button></div>
       <p class="helper-text" id="alcoholFeedback"></p>
     </article>
-
     <article class="feature-card white-card">
       <h3>Cigarrillo</h3>
       <div class="dual-grid">
@@ -117,17 +115,33 @@
 
   <section id="tasks" class="screen">
     <div class="screen-top"><button class="back-link" data-home>← Volver a inicio</button><button class="menu-link" data-open-menu>Registrar otra categoría</button></div>
-    <div class="screen-title"><h2>Tareas</h2><p>Rutinas visuales, bonitas y fáciles de marcar.</p></div>
-
-    <div class="dual-cards compact-stats">
-      <article class="feature-card tinted-card peach"><h3>Casa completadas</h3><strong class="big-value" id="homeTasksDone">0/0</strong></article>
-      <article class="feature-card tinted-card violet"><h3>Trabajo completadas</h3><strong class="big-value" id="workTasksDone">0/0</strong></article>
+    <div class="screen-title"><h2>Tareas</h2><p>Rutinas visuales para casa y tareas laborales aterrizadas a tu realidad.</p></div>
+    <div class="stats-grid-4">
+      <article class="feature-card tinted-card peach mini-stat"><span>Casa completadas</span><strong id="homeTasksDone">0/0</strong></article>
+      <article class="feature-card tinted-card violet mini-stat"><span>Laborales activas</span><strong id="workTasksActive">0</strong></article>
+      <article class="feature-card tinted-card rose mini-stat"><span>Vencidas</span><strong id="workTasksOverdue">0</strong></article>
+      <article class="feature-card tinted-card sky mini-stat"><span>Vence pronto</span><strong id="workTasksSoon">0</strong></article>
     </div>
 
     <article class="feature-card white-card">
       <h3>🏠 Tareas de casa</h3>
       <div id="homeTasksList" class="task-card-list"></div>
     </article>
+
+    <article class="feature-card white-card">
+      <h3>💼 Crear tarea laboral</h3>
+      <div class="dual-grid">
+        <label>Tarea<input id="workTaskTitle" type="text" placeholder="Ej. Diagnóstico sector 7-8"/></label>
+        <label>Fecha final<input id="workTaskDue" type="date"/></label>
+      </div>
+      <div class="dual-grid">
+        <label>Prioridad<select id="workTaskPriority"><option value="alta">Alta</option><option value="media" selected>Media</option><option value="baja">Baja</option></select></label>
+        <label>Descripción<input id="workTaskDesc" type="text" placeholder="Ej. enviar correo de órdenes pendientes"/></label>
+      </div>
+      <div class="button-row"><button class="btn" id="saveWorkTaskBtn">Guardar tarea laboral</button></div>
+      <p class="helper-text">La app calculará el avance por tiempo entre hoy y la fecha final, y te alertará si vence pronto o si ya se pasó.</p>
+    </article>
+
     <article class="feature-card white-card">
       <h3>💼 Actividades laborales</h3>
       <div id="workTasksList" class="task-card-list"></div>
@@ -139,8 +153,8 @@
     <div class="screen-title"><h2>Cuerpo</h2><p>Desde casa y sin comprar nada raro.</p></div>
     <article class="feature-card white-card">
       <h3>Ejercicio rápido</h3>
-      <div class="task-card pastel-yellow complete-mini" data-body="move"><div><small>20–30 min</small><strong>Rutina de movimiento</strong><p>Movilidad + cardio suave + estiramiento.</p></div><button class="mini-check" id="bodyDoneBtn">✓</button></div>
-      <p class="helper-text" id="bodyText">Marca cuando la completes.</p>
+      <div class="task-card pastel-yellow complete-mini"><div><small>20–30 min</small><strong>Rutina de movimiento</strong><p>Movilidad + cardio suave + estiramiento.</p></div><button class="mini-check" id="bodyDoneBtn">✓</button></div>
+      <p class="helper-text" id="bodyText">Marca la rutina cuando la completes.</p>
     </article>
     <article class="feature-card white-card">
       <h3>Respiración guiada</h3>
@@ -179,8 +193,13 @@
 
   <section id="dashboard" class="screen">
     <div class="screen-top"><button class="back-link" data-home>← Volver a inicio</button><button class="menu-link" data-open-menu>Registrar otra categoría</button></div>
-    <div class="screen-title"><h2>Dashboard</h2><p>Vista general estilo Power BI, pero en tu app.</p></div>
+    <div class="screen-title"><h2>Dashboard</h2><p>Vista general estilo Power BI, con gráfico lineal y resúmenes reales.</p></div>
     <article class="dashboard-board">
+      <div class="chart-card line-chart-card">
+        <h3>Movimiento de los últimos 7 días</h3>
+        <div class="legend-row"><span><i class="dot dot1"></i> Recuperado</span><span><i class="dot dot2"></i> Desperdiciado</span></div>
+        <div id="lineChartWrap" class="line-chart-wrap"></div>
+      </div>
       <div class="board-kpis">
         <div class="board-kpi"><span>Ahorro potencial hoy</span><strong id="dbRecovered">0 COP</strong></div>
         <div class="board-kpi"><span>Gasto alcohol</span><strong id="dbAlcohol">0 COP</strong></div>
@@ -206,7 +225,6 @@
 </main>
 
 <button class="fab-menu" id="fabMenuBtn" title="Abrir menú rápido"><img src="./goma-icon.png" alt="Goma"/></button>
-
 <div class="quick-menu hidden" id="quickMenuOverlay">
   <div class="quick-menu-card">
     <div class="quick-header"><h3>¿Qué quieres abrir?</h3><button class="close-x" data-close-menu>✕</button></div>
@@ -222,7 +240,6 @@
     </div>
   </div>
 </div>
-
 <div class="message-bubble hidden" id="messageBubble">
   <div class="bubble-head"><span>Mensaje de Goma</span><button id="closeBubble">✕</button></div>
   <p id="bubbleText"></p>
@@ -230,4 +247,5 @@
 <div id="pawLayer"></div>
 <div class="toast" id="toast"></div>
 <script src="./app.js" defer></script>
-</body></html>
+</body>
+</html>
