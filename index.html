@@ -1,47 +1,86 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Heidi Life OS</title>
-<style>
-body{font-family:sans-serif;background:#f6f3ff;margin:0}
-.screen{display:none;padding:20px}
-.screen.active{display:block}
-nav{position:fixed;bottom:0;width:100%;display:flex;background:#fff;border-top:1px solid #ccc}
-nav button{flex:1;padding:15px;font-size:16px}
-.card{background:#fff;padding:15px;border-radius:12px;margin:10px 0}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#8f79d9" />
+  <title>Heidi Life OS</title>
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="icon" type="image/png" href="./icon-192.png" />
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
+  <main class="app" aria-live="polite">
+    <section id="inicio" class="screen active">
+      <header><h1>Heidi Life OS</h1><p>Tu sistema personal de avance diario.</p></header>
+      <article class="card"><h2>Hoy</h2><p id="homeToday">Cargando resumen...</p></article>
+      <article class="card"><h2>Meta universitaria</h2><p id="goalText">Meta: 10,000,000 COP</p><div class="progress"><div id="goalBar"></div></div></article>
+      <article class="card"><h2>Goma te acompaña</h2><p id="gomaMessage">Vamos paso a paso. Hoy también cuenta.</p></article>
+    </section>
 
-<div id="home" class="screen active">
-<h2>Inicio</h2>
-<div class="card">Resumen del día</div>
-</div>
+    <section id="habitos" class="screen">
+      <header><h1>Hábitos</h1><p>Firmeza con empatía. Cada reducción es progreso.</p></header>
+      <article class="card">
+        <h2>Alcohol</h2>
+        <label>Consumo de hoy (COP): <input id="alcoholToday" type="number" min="0" step="500" /></label>
+        <label>Gasto típico diario (COP): <input id="alcoholTypical" type="number" min="0" step="500" /></label>
+        <button class="btn" data-action="save-alcohol">Guardar consumo</button>
+        <p id="alcoholFeedback"></p>
+      </article>
+      <article class="card">
+        <h2>Cigarrillo</h2>
+        <label>Gasto habitual diario (COP): <input id="smokeTypical" type="number" min="0" step="500" /></label>
+        <div class="counter-row"><button class="btn ghost" data-action="smoke-minus">-1</button><span id="smokeCount">0</span><button class="btn ghost" data-action="smoke-plus">+1</button></div>
+        <p id="smokeImpact"></p>
+      </article>
+    </section>
 
-<div id="habits" class="screen">
-<h2>Hábitos</h2>
-<div class="card">Alcohol y cigarrillo</div>
-</div>
+    <section id="dinero" class="screen">
+      <header><h1>Dinero</h1><p>Saldo y control por categorías en tiempo real.</p></header>
+      <article class="card">
+        <label>Salario mensual (COP): <input id="salary" type="number" min="0" step="10000" /></label>
+        <div id="expenseFields" class="grid"></div>
+      </article>
+      <article class="card highlight"><h2>Dinero desperdiciado en alcohol y tabaco</h2><p id="wasteCard">0 COP</p></article>
+      <article class="card"><h2>Saldo mensual estimado</h2><p id="balanceText">0 COP</p></article>
+    </section>
 
-<div id="money" class="screen">
-<h2>Dinero</h2>
-<div class="card">Finanzas</div>
-</div>
+    <section id="cuerpo" class="screen">
+      <header><h1>Cuerpo</h1></header>
+      <article class="card"><h2>Rutina 20-30 min</h2><p>5 min movilidad · 15 min cardio suave · 5 min estiramiento.</p><button class="btn" data-action="exercise-done">Rutina completada</button></article>
+      <article class="card"><h2>Respiración guiada</h2><p>Inhala 4s · sostén 4s · exhala 6s por 5 ciclos.</p><button class="btn" data-action="breath-start">Iniciar 1 ciclo</button><p id="breathStatus"></p></article>
+    </section>
 
-<nav>
-<button onclick="go('home')">Inicio</button>
-<button onclick="go('habits')">Hábitos</button>
-<button onclick="go('money')">Dinero</button>
-</nav>
+    <section id="estudio" class="screen">
+      <header><h1>Estudio</h1></header>
+      <article class="card">
+        <label>Tema: <input id="studyTopic" type="text" placeholder="Ej: matemáticas" /></label>
+        <label>Minutos: <input id="studyMinutes" type="number" min="0" step="5" /></label>
+        <button class="btn" data-action="study-save">Registrar estudio</button>
+        <p id="studyProgress"></p>
+      </article>
+    </section>
 
-<script>
-function go(id){
-document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-document.getElementById(id).classList.add('active');
-}
-</script>
+    <section id="dia" class="screen">
+      <header><h1>Día</h1></header>
+      <article class="card"><label>Diario<input id="journalTitle" type="text" placeholder="Título" /></label><label>Entrada<textarea id="journalBody" rows="4" placeholder="¿Qué pasó hoy?"></textarea></label><button class="btn" data-action="journal-save">Guardar diario</button></article>
+      <article class="card"><label>Cierre y reflexión<textarea id="dayReflection" rows="3" placeholder="¿Qué mejorarás mañana?"></textarea></label><button class="btn" data-action="reflection-save">Cerrar día</button></article>
+    </section>
 
+    <section id="panel" class="screen">
+      <header><h1>Panel</h1></header>
+      <article class="card"><h2>Hábitos vs meta</h2><div id="chart" class="chart"></div></article>
+      <article class="card"><h2>Resumen semanal</h2><p id="weeklySummary"></p></article>
+    </section>
+  </main>
+
+  <img id="goma" src="./gatito.png" alt="Goma, gatito guía" />
+
+  <nav class="bottom-nav">
+    <button data-screen="inicio">Inicio</button><button data-screen="habitos">Hábitos</button><button data-screen="dinero">Dinero</button>
+    <button data-screen="cuerpo">Cuerpo</button><button data-screen="estudio">Estudio</button><button data-screen="dia">Día</button><button data-screen="panel">Panel</button>
+  </nav>
+
+  <script src="./app.js" defer></script>
 </body>
 </html>
