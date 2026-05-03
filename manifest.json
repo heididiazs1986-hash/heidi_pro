@@ -2,7 +2,7 @@
   "name": "Heidi Life OS",
   "short_name": "Heidi OS",
   "id": "/",
-  "start_url": "./index.html?v=finalplus1",
+  "start_url": "./index.html?v=finalplus2-worktasks-fix",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",

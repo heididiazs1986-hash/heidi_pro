@@ -1,6 +1,8 @@
 
-const KEY='heidi_life_os_final_plus';
+const KEY='heidi_life_os_final_plus_v2';
+const legacyState = JSON.parse(localStorage.getItem('heidi_life_os_final_plus') || localStorage.getItem('heidi_life_os_polished') || '{}');
 const state=JSON.parse(localStorage.getItem(KEY)||'{}');
+Object.assign(state, {...legacyState, ...state});
 const $=id=>document.getElementById(id);
 const fmt=n=>new Intl.NumberFormat('es-CO').format(Math.round(Number(n||0)))+' COP';
 const shortFmt=n=>new Intl.NumberFormat('es-CO',{notation:'compact',maximumFractionDigits:1}).format(Math.round(Number(n||0)));
@@ -38,9 +40,20 @@ state.tasks.home ??= [
   {id:'h7',emoji:'🧊',when:'Semana',text:'Limpiar la nevera',desc:'Revisar alimentos y limpiar repisas.',color:'pastel-violet',done:false},
   {id:'h8',emoji:'🔥',when:'Semana',text:'Limpiar la estufa',desc:'Quemadores, tapa y grasa superficial.',color:'pastel-orange',done:false}
 ];
-state.workTasks ??= [];
-// migrate old default work tasks if any existed in older versions
-if(Array.isArray(state.tasks.work) && !state._migratedWork){state.workTasks=[]; state._migratedWork=true;}
+// Tareas laborales: NO deben venir predefinidas.
+const oldDefaultWorkTitles = [
+  'Revisar pendientes de trabajo',
+  'Responder contactos clave',
+  'Registrar gastos o avances',
+  'Organizar archivos y notas',
+  'Planear siguiente gestión'
+];
+if(!Array.isArray(state.workTasks)) state.workTasks = [];
+state.workTasks = state.workTasks.filter(t => !oldDefaultWorkTitles.includes(t.title || t.text || ''));
+if(state.tasks && Array.isArray(state.tasks.work)) {
+  delete state.tasks.work;
+}
+state._workTasksCleanV2 = true;
 
 function escapeHtml(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
 function labelCat(c){return ({mercado:'Mercado',arriendo:'Arriendo',servicios:'Servicios',deudas:'Deudas',ahorro:'Ahorro',transporte:'Transporte',salud:'Salud',estudio:'Estudio',alcohol:'Alcohol',tabaco:'Tabaco',otros:'Otros'})[c]||c;}
@@ -66,7 +79,7 @@ $('kpiStreak').textContent=`${streak()} día(s)`;$('kpiCigs').textContent=state.
 $('alcoholToday').value=state.alcoholToday||'';$('alcoholTypical').value=state.alcoholTypical||'';$('smokeTypical').value=state.smokeTypical||'';$('smokeHabitual').value=state.smokeHabitual||'';$('smokeCount').textContent=state.smokeCount||0;
 const alcoholDelta=Number(state.alcoholTypical||0)-Number(state.alcoholToday||0);$('alcoholFeedback').textContent=alcoholDelta>=0?`Hoy evitaste ${fmt(alcoholDelta)} frente a tu patrón. Eso también vale.`:`Hoy te pasaste ${fmt(Math.abs(alcoholDelta))}. Regístralo sin mentirte y vuelve al plan.`;$('smokeFeedback').textContent=`Impacto inmediato de hoy: ${fmt(m.smokeSpent)}. Recuperado frente a tu rutina: ${fmt(Math.max(0,Number(state.smokeTypical||0)-m.smokeSpent))}.`;
 $('salaryInput').value=state.salary||'';$('goalSavedInput').value=state.goalSaved||'';$('goalLabel').textContent=`${fmt(state.goalSaved)} de ${fmt(state.goalTarget)} · ${m.goalPct.toFixed(0)}%`;$('goalBar').style.width=m.goalPct+'%';$('wasteValue').textContent=fmt(m.wasted);$('balanceValue').textContent=fmt(m.balance);renderExpenseList();
-renderHomeTaskCards('homeTasksList', state.tasks.home); const workList=(state.workTasks||[]).slice().sort((a,b)=>(a.done===b.done)?(a.dueDate||'').localeCompare(b.dueDate||''):(a.done?1:-1)); renderWorkTaskCards('workTasksList', workList); $('homeTasksDone').textContent=`${state.tasks.home.filter(t=>t.done).length}/${state.tasks.home.length}`; const active=workList.filter(t=>!t.done); $('workTasksActive').textContent=String(active.length); $('workTasksOverdue').textContent=String(active.filter(t=>workTaskInfo(t).daysLeft<0).length); $('workTasksSoon').textContent=String(active.filter(t=>{const d=workTaskInfo(t).daysLeft; return d>=0&&d<=1;}).length);
+renderHomeTaskCards('homeTasksList', state.tasks.home); const workList=(Array.isArray(state.workTasks)?state.workTasks:[]).filter(t=>t && t.title).slice().sort((a,b)=>(a.done===b.done)?(a.dueDate||'').localeCompare(b.dueDate||''):(a.done?1:-1)); renderWorkTaskCards('workTasksList', workList); $('homeTasksDone').textContent=`${state.tasks.home.filter(t=>t.done).length}/${state.tasks.home.length}`; const active=workList.filter(t=>!t.done); $('workTasksActive').textContent=String(active.length); $('workTasksOverdue').textContent=String(active.filter(t=>workTaskInfo(t).daysLeft<0).length); $('workTasksSoon').textContent=String(active.filter(t=>{const d=workTaskInfo(t).daysLeft; return d>=0&&d<=1;}).length);
 $('bodyText').textContent=state.exerciseDone?`Última rutina registrada: ${state.bodyLast||today()}. Bien.`:'Marca la rutina cuando la completes.'; $('studyTopic').value=state.studyTopic||''; $('studyText').textContent=state.studyTopic?`Último tema: ${state.studyTopic} · Total acumulado: ${state.studyTotal||0} min.`:'Aún no has registrado estudio.'; $('journalTitle').value=state.journalTitle||''; $('journalBody').value=state.journalBody||''; $('reflectionBody').value=state.reflectionBody||'';
 $('dbRecovered').textContent=fmt(m.recoveredToday); $('dbAlcohol').textContent=fmt(state.alcoholToday||0); $('dbSmoke').textContent=fmt(m.smokeSpent); $('dbStudy').textContent=`${state.studyTotal||0} min`; renderLineChart();
 renderBars('habitBars', [
@@ -87,11 +100,63 @@ $('saveSalaryBtn').addEventListener('click',()=>{state.salary=Number($('salaryIn
 $('saveExpenseBtn').addEventListener('click',()=>{const category=$('expenseCategory').value, amount=Number($('expenseAmount').value||0), desc=$('expenseDesc').value.trim(); if(amount<=0){toast('Ingresa un valor válido'); return;} state.expenses.push({id:Date.now(),date:today(),category,amount,description:desc}); if(category==='ahorro') state.goalSaved=Number(state.goalSaved||0)+amount; $('expenseAmount').value=''; $('expenseDesc').value=''; save(); toast('Gasto guardado'); askNext('Gasto registrado. ¿Quieres pasar a otra categoría?');});
 $('exportBackupBtn').addEventListener('click',()=>{const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`HEIDI_LIFE_OS_${today()}.json`; a.click(); URL.revokeObjectURL(a.href); toast('Respaldo exportado');});
 $('recoveredToGoalBtn').addEventListener('click',()=>{const rec=calc().recoveredToday; if(rec<=0){toast('Hoy no hay recuperado para enviar'); return;} state.goalSaved=Number(state.goalSaved||0)+rec; state.expenses.push({id:Date.now(),date:today(),category:'ahorro',amount:rec,description:'Recuperado por reducción de hábitos'}); save(); toast('Recuperado enviado al título'); showMessage('Eso sí suma. Convertiste tu esfuerzo en ahorro real.',5);});
-$('saveWorkTaskBtn').addEventListener('click',()=>{const title=$('workTaskTitle').value.trim(); const due=$('workTaskDue').value; const priority=$('workTaskPriority').value; const desc=$('workTaskDesc').value.trim(); if(!title || !due){toast('Escribe la tarea y la fecha final'); return;} state.workTasks.push({id:String(Date.now()),title,desc,priority,dueDate:due,createdAt:today(),done:false}); $('workTaskTitle').value=''; $('workTaskDue').value=''; $('workTaskPriority').value='media'; $('workTaskDesc').value=''; save(); toast('Tarea laboral guardada'); showMessage('Tu tarea laboral quedó creada con seguimiento de avance y alerta por fecha.',5);});
+$('saveWorkTaskBtn').addEventListener('click',()=>{
+  const titleEl = $('workTaskTitle');
+  const dueEl = $('workTaskDue');
+  const priorityEl = $('workTaskPriority');
+  const descEl = $('workTaskDesc');
+  const title = (titleEl?.value || '').trim();
+  const due = (dueEl?.value || today()).trim();
+  const priority = priorityEl?.value || 'media';
+  const desc = (descEl?.value || '').trim();
+
+  if(!title){
+    toast('Escribe la tarea laboral');
+    showMessage('Necesito por lo menos el nombre de la tarea laboral. La fecha final puede quedar en hoy si no la eliges.',5);
+    titleEl?.focus();
+    return;
+  }
+
+  if(!Array.isArray(state.workTasks)) state.workTasks = [];
+  state.workTasks.push({
+    id: 'work_' + Date.now(),
+    title,
+    desc,
+    priority,
+    dueDate: due,
+    createdAt: today(),
+    done: false
+  });
+
+  if(titleEl) titleEl.value='';
+  if(dueEl) dueEl.value='';
+  if(priorityEl) priorityEl.value='media';
+  if(descEl) descEl.value='';
+
+  save();
+  toast('Tarea laboral guardada');
+  showMessage('Tu tarea laboral quedó creada con seguimiento por fecha, prioridad y alerta visual.',5);
+  setTimeout(()=>go('tasks'),120);
+});
 document.addEventListener('click',e=>{const rem=e.target.getAttribute('data-remove'); if(rem){state.expenses=state.expenses.filter(x=>String(x.id)!==String(rem)); save(); toast('Gasto eliminado');} const hid=e.target.getAttribute('data-home-task'); if(hid){state.tasks.home=state.tasks.home.map(t=>t.id===hid?{...t,done:!t.done}:t); save(); spawnPaws(); showMessage('Muy bien. Lo de casa también cuenta.',3);} const wid=e.target.getAttribute('data-work-task'); if(wid){state.workTasks=state.workTasks.map(t=>t.id===wid?{...t,done:!t.done}:t); save(); spawnPaws(); showMessage('Listo. Tarea laboral actualizada.',3);}});
+$('clearDefaultWorkBtn')?.addEventListener('click',()=>{
+  const oldDefaultWorkTitles = ['Revisar pendientes de trabajo','Responder contactos clave','Registrar gastos o avances','Organizar archivos y notas','Planear siguiente gestión'];
+  state.workTasks = (Array.isArray(state.workTasks)?state.workTasks:[]).filter(t => !oldDefaultWorkTitles.includes(t.title || t.text || ''));
+  if(state.tasks && Array.isArray(state.tasks.work)) delete state.tasks.work;
+  save();
+  toast('Tareas laborales viejas limpiadas');
+  showMessage('Listo. Se retiraron las tareas laborales predeterminadas. Ahora solo quedan las que tú crees.',5);
+});
 $('bodyDoneBtn').addEventListener('click',()=>{state.exerciseDone=true; state.bodyLast=today(); save(); spawnPaws(); showMessage('Excelente. Hoy sí te moviste. Aunque sea poco, cuenta.',4); toast('Rutina registrada');}); $('breathBtn').addEventListener('click',()=>showMessage('Inhala 4 · sostén 4 · exhala 6. Haz 5 ciclos. Baja el cuerpo antes de decidir.',6));
 $('saveStudyBtn').addEventListener('click',()=>{const mins=Number($('studyMinutes').value||0); state.studyTopic=$('studyTopic').value.trim(); state.studyTotal=Number(state.studyTotal||0)+mins; $('studyMinutes').value=''; save(); toast('Estudio guardado'); askNext('Buen trabajo. Estudiar también es construir salida. ¿Qué sigue?');});
 $('saveJournalBtn').addEventListener('click',()=>{state.journalTitle=$('journalTitle').value; state.journalBody=$('journalBody').value; state.journalDate=today(); save(); toast('Diario guardado'); showMessage('Escribir también ordena. Ya quedó guardado.',4);});
 $('saveReflectionBtn').addEventListener('click',()=>{state.reflectionBody=$('reflectionBody').value; state.reflectionDate=today(); save(); toast('Cierre guardado'); showMessage('Cierre listo. Mañana no empieza desde cero: empieza desde lo aprendido.',5);});}
 if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}
-window.addEventListener('DOMContentLoaded',()=>{bind(); render(); showMessage('Bienvenida. Hoy no se arregla toda la vida. Hoy se sostiene el plan.',5);});
+window.addEventListener('DOMContentLoaded',()=>{
+  const dueEl = $('workTaskDue');
+  if(dueEl && !dueEl.value) dueEl.value = today();
+  bind();
+  save();
+  render();
+  showMessage('Bienvenida. Hoy no se arregla toda la vida. Hoy se sostiene el plan.',5);
+});
