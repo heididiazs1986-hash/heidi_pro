@@ -1,32 +1,22 @@
 {
   "name": "Heidi Life OS",
-  "short_name": "Heidi OS",
-  "id": "/",
-  "start_url": "./index.html?v=finalplus2-worktasks-fix",
+  "short_name": "Life OS",
+  "start_url": "./index.html?v=life-os-v1",
   "scope": "./",
   "display": "standalone",
-  "orientation": "portrait",
-  "background_color": "#f8e6f2",
-  "theme_color": "#a186ee",
-  "description": "App personal para hábitos, dinero, tareas, cuerpo, estudio, diario y dashboard.",
+  "background_color": "#f7f3ff",
+  "theme_color": "#8b5cf6",
+  "description": "Centro personal por módulos para hábitos, dinero, cuerpo, estudio y cierre diario.",
   "icons": [
     {
-      "src": "./icon-180.png",
-      "sizes": "180x180",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "./icon-192.png",
+      "src": "icon-192.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     },
     {
-      "src": "./icon-512.png",
+      "src": "icon-512.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     }
   ]
 }
