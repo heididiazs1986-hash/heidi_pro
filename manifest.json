@@ -1,36 +1,17 @@
 {
-  "name": "Heidi en mejor versión PRO",
-  "short_name": "Heidi PRO",
+  "name": "Heidi Life OS",
+  "short_name": "Heidi OS",
   "id": "/",
-  "start_url": "./index.html?v=6-ui-pantallas",
+  "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "display_override": [
-    "standalone",
-    "minimal-ui"
-  ],
   "orientation": "portrait",
-  "background_color": "#f6f4fb",
-  "theme_color": "#7c4df0",
-  "description": "App personal por pantallas para hábitos, dinero, cuerpo, estudio y vida diaria.",
+  "background_color": "#f4f5ff",
+  "theme_color": "#8f79d9",
+  "description": "Sistema personal PWA para hábitos, dinero, cuerpo, estudio, día y panel.",
   "icons": [
-    {
-      "src": "./icon-180.png",
-      "sizes": "180x180",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "./icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "./icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
+    { "src": "./icon-180.png", "sizes": "180x180", "type": "image/png", "purpose": "any" },
+    { "src": "./icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
   ]
 }
