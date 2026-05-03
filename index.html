@@ -1,175 +1,233 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#a285ee" />
-  <title>Heidi Life OS</title>
-  <link rel="manifest" href="./manifest.json" />
-  <link rel="icon" type="image/png" href="./icon-192.png" />
-  <link rel="apple-touch-icon" href="./icon-180.png" />
-  <link rel="stylesheet" href="./styles.css" />
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="theme-color" content="#a186ee"/>
+<title>Heidi Life OS</title>
+<link rel="manifest" href="./manifest.json"/>
+<link rel="icon" href="./icon-192.png"/>
+<link rel="apple-touch-icon" href="./icon-180.png"/>
+<link rel="stylesheet" href="./styles.css"/>
 </head>
 <body>
-  <header class="topbar">
+<header class="app-header">
+  <div class="header-brand">
+    <img src="./goma-icon.png" alt="Goma" class="brand-icon"/>
     <div>
-      <div class="app-name">Heidi Life OS</div>
-      <div class="app-sub" id="todayLabel">Cargando fecha...</div>
+      <h1>Heidi Life OS</h1>
+      <p id="todayLabel">Cargando fecha...</p>
     </div>
-    <div class="top-pill" id="topState">Día en construcción</div>
-  </header>
+  </div>
+  <div class="header-status" id="statusPill">Día en construcción</div>
+</header>
 
-  <nav class="tabbar" aria-label="Módulos">
-    <button data-screen="inicio" class="active">🏠 Inicio</button>
-    <button data-screen="habitos">🚨 Hábitos</button>
-    <button data-screen="dinero">💰 Dinero</button>
-    <button data-screen="tareas">📝 Tareas</button>
-    <button data-screen="cuerpo">🧘 Cuerpo</button>
-    <button data-screen="estudio">💻 Estudio</button>
-    <button data-screen="dia">📖 Día</button>
-    <button data-screen="panel">📊 Panel</button>
-  </nav>
-
-  <main class="app">
-    <section id="inicio" class="screen active">
-      <div class="screen-head">
-        <h1>Resumen general</h1>
-        <p>Tu sistema personal de orden. Más claro, más útil y más bonito.</p>
-      </div>
-
-      <section class="hero card">
-        <div>
-          <h2 id="heroTitle">Hoy cuenta</h2>
-          <p id="heroSummary">Cargando panorama del día...</p>
-        </div>
-        <button class="btn soft" id="sendRecoveredBtn">Enviar recuperado al título</button>
-      </section>
-
-      <section class="kpi-grid">
-        <article class="kpi-card"><span>Racha sin alcohol</span><strong id="kpiStreak">0 días</strong></article>
-        <article class="kpi-card"><span>Cigarrillos hoy</span><strong id="kpiCigs">0</strong></article>
-        <article class="kpi-card"><span>Dinero recuperado</span><strong id="kpiRecovered">0 COP</strong></article>
-        <article class="kpi-card"><span>Avance título</span><strong id="kpiGoal">0%</strong></article>
-      </section>
-
-      <section class="card">
-        <div class="section-title">Acciones principales</div>
-        <div class="action-grid">
-          <button class="action-card" data-screen="habitos"><span class="ico">🚨</span><b>Hábitos</b><small>Alcohol y cigarrillo</small></button>
-          <button class="action-card" data-screen="dinero"><span class="ico">💰</span><b>Dinero</b><small>Salario, gastos y saldo</small></button>
-          <button class="action-card" data-screen="tareas"><span class="ico">📝</span><b>Tareas</b><small>Casa y trabajo</small></button>
-          <button class="action-card" data-screen="cuerpo"><span class="ico">🧘</span><b>Cuerpo</b><small>Movimiento y calma</small></button>
-          <button class="action-card" data-screen="estudio"><span class="ico">💻</span><b>Estudio</b><small>Programación y avance</small></button>
-          <button class="action-card" data-screen="panel"><span class="ico">📊</span><b>Panel</b><small>Tu lectura semanal</small></button>
-        </div>
-      </section>
-    </section>
-
-    <section id="habitos" class="screen">
-      <div class="screen-head"><h1>Hábitos</h1><p>Firmeza con empatía. La reducción también cuenta.</p></div>
-      <article class="card accent alcohol">
-        <div class="section-title">Alcohol</div>
-        <label>Consumo de hoy (COP)<input id="alcoholToday" type="number" min="0" step="500" placeholder="0"></label>
-        <label>Gasto típico diario (COP)<input id="alcoholTypical" type="number" min="0" step="500" placeholder="40000"></label>
-        <div class="btn-row two"><button class="btn" id="saveAlcoholBtn">Guardar consumo</button><button class="btn alert" id="urgencyBtn">Tengo ganas de tomar</button></div>
-        <p class="feedback" id="alcoholFeedback"></p>
-      </article>
-      <article class="card accent smoke">
-        <div class="section-title">Cigarrillo</div>
-        <div class="grid two">
-          <label>Gasto habitual diario (COP)<input id="smokeTypical" type="number" min="0" step="500" placeholder="10000"></label>
-          <label>Cigarrillos habituales por día<input id="smokeHabitualCount" type="number" min="1" step="1" placeholder="10"></label>
-        </div>
-        <div class="counter-wrap">
-          <button class="counter-btn ghost" id="smokeMinus">-1</button>
-          <div class="counter-center"><span>Cigarrillos hoy</span><strong id="smokeCount">0</strong></div>
-          <button class="counter-btn" id="smokePlus">+1</button>
-        </div>
-        <p class="feedback" id="smokeImpact"></p>
-      </article>
-    </section>
-
-    <section id="dinero" class="screen">
-      <div class="screen-head"><h1>Dinero</h1><p>Control por categorías, saldo real y meta del título.</p></div>
-      <article class="card">
-        <div class="grid two">
-          <label>Salario mensual (COP)<input id="salary" type="number" min="0" step="10000" placeholder="0"></label>
-          <label>Bolsillo título acumulado (COP)<input id="goalSaved" type="number" min="0" step="10000" placeholder="0"></label>
-        </div>
-        <div class="progress-wrap"><div class="progress-top"><span>Meta título</span><strong id="goalText">0%</strong></div><div class="progress"><div id="goalBar"></div></div></div>
-      </article>
-      <article class="card">
-        <div class="section-title">Registrar gasto</div>
-        <div class="grid three">
-          <label>Categoría<select id="expenseCategory"><option value="mercado">Mercado</option><option value="arriendo">Arriendo</option><option value="servicios">Servicios</option><option value="transporte">Transporte</option><option value="deudas">Deudas</option><option value="ahorro">Ahorro</option><option value="alcohol">Alcohol</option><option value="tabaco">Tabaco</option><option value="salud">Salud</option><option value="estudio">Estudio</option><option value="otros">Otros</option></select></label>
-          <label>Valor<input id="expenseAmount" type="number" min="0" step="500" placeholder="0"></label>
-          <label>Descripción<input id="expenseDesc" type="text" placeholder="Ej. verduras, agua, bolsillo Davivienda"></label>
-        </div>
-        <div class="btn-row two"><button class="btn" id="addExpenseBtn">Agregar gasto</button><button class="btn soft" id="exportBtn">Exportar respaldo</button></div>
-        <div id="expenseList" class="expense-list"></div>
-      </article>
-      <div class="split-two">
-        <article class="card outline"><div class="section-title">Dinero desperdiciado en alcohol y tabaco</div><p class="big-number" id="wasteCard">0 COP</p></article>
-        <article class="card"><div class="section-title">Saldo mensual estimado</div><p class="big-number" id="balanceText">0 COP</p></article>
-      </div>
-    </section>
-
-    <section id="tareas" class="screen">
-      <div class="screen-head"><h1>Tareas</h1><p>Casa y trabajo, ordenadas y visibles.</p></div>
-      <article class="card">
-        <div class="section-title">Nueva tarea</div>
-        <div class="grid three">
-          <label>Tipo<select id="taskType"><option value="casa">Casa</option><option value="trabajo">Trabajo</option></select></label>
-          <label>Horario<select id="taskWhen"><option value="Hoy">Hoy</option><option value="Mañana">Mañana</option><option value="Semana">Semana</option><option value="Cualquier momento">Cualquier momento</option></select></label>
-          <label>Tarea<input id="taskText" type="text" placeholder="Ej. limpiar cocina / llamar cliente"></label>
-        </div>
-        <button class="btn" id="addTaskBtn">Agregar tarea</button>
-      </article>
-      <div class="split-two">
-        <article class="card pastel home">
-          <div class="section-title">🏠 Tareas de casa</div>
-          <div id="homeTasks" class="task-list"></div>
-        </article>
-        <article class="card pastel work">
-          <div class="section-title">💼 Actividades laborales</div>
-          <div id="workTasks" class="task-list"></div>
-        </article>
-      </div>
-    </section>
-
-    <section id="cuerpo" class="screen">
-      <div class="screen-head"><h1>Cuerpo</h1><p>20 a 30 minutos desde casa también cuentan.</p></div>
-      <article class="card"><div class="section-title">Rutina rápida</div><p>5 min movilidad · 15 min cardio suave · 5 min estiramiento.</p><button class="btn" id="exerciseDoneBtn">Rutina completada</button></article>
-      <article class="card"><div class="section-title">Respiración guiada</div><p>Inhala 4s · sostén 4s · exhala 6s por 5 ciclos.</p><button class="btn soft" id="breathBtn">Iniciar un ciclo</button><p class="feedback" id="breathStatus"></p></article>
-    </section>
-
-    <section id="estudio" class="screen">
-      <div class="screen-head"><h1>Estudio</h1><p>Programación, foco y constancia.</p></div>
-      <article class="card"><label>Tema<input id="studyTopic" type="text" placeholder="Ej. JavaScript funciones"></label><label>Minutos de hoy<input id="studyMinutes" type="number" min="0" step="5" placeholder="20"></label><button class="btn" id="studySaveBtn">Registrar estudio</button><p class="feedback" id="studyProgress"></p></article>
-    </section>
-
-    <section id="dia" class="screen">
-      <div class="screen-head"><h1>Día</h1><p>Diario y cierre: saca de la cabeza lo que te pesa.</p></div>
-      <article class="card"><label>Título<input id="journalTitle" type="text" placeholder="¿Cómo fue tu día?"></label><label>Entrada<textarea id="journalBody" rows="4" placeholder="¿Qué pasó hoy?"></textarea></label><button class="btn" id="journalSaveBtn">Guardar diario</button></article>
-      <article class="card"><label>Cierre y reflexión<textarea id="dayReflection" rows="3" placeholder="¿Qué mejorarás mañana?"></textarea></label><button class="btn soft" id="reflectionSaveBtn">Cerrar día</button></article>
-    </section>
-
-    <section id="panel" class="screen">
-      <div class="screen-head"><h1>Panel</h1><p>Tu resumen aterrizado de la semana.</p></div>
-      <article class="card"><div class="section-title">Hábitos vs meta</div><div id="chart" class="chart"></div></article>
-      <article class="card"><div class="section-title">Resumen semanal</div><p class="feedback" id="weeklySummary"></p></article>
-    </section>
-  </main>
-
-  <aside class="coach-strip" aria-live="polite">
-    <img src="./gatito.png" alt="Goma" class="coach-cat">
-    <div>
-      <div class="coach-title">Goma</div>
-      <div class="coach-message" id="gomaMessage">Hoy no se arregla toda la vida. Hoy se sostiene el plan.</div>
+<main class="app-shell">
+  <section id="home" class="screen active">
+    <div class="screen-title">
+      <h2>Inicio</h2>
+      <p>Tu centro de control personal. Elige qué quieres trabajar hoy.</p>
     </div>
-  </aside>
 
-  <div class="toast" id="toast"></div>
-  <script src="./app.js" defer></script>
-</body>
-</html>
+    <article class="hero-card">
+      <div>
+        <h3 id="homeHeroTitle">Tu mejora se construye en pequeño</h3>
+        <p id="homeHeroText">Cargando resumen...</p>
+      </div>
+      <button class="btn secondary" id="recoveredToGoalBtn">Enviar recuperado al título</button>
+    </article>
+
+    <section class="kpi-grid">
+      <article class="kpi-card lilac"><span>Racha sin alcohol</span><strong id="kpiStreak">0 días</strong></article>
+      <article class="kpi-card blue"><span>Cigarrillos hoy</span><strong id="kpiCigs">0</strong></article>
+      <article class="kpi-card pink"><span>Dinero recuperado hoy</span><strong id="kpiRecovered">0 COP</strong></article>
+      <article class="kpi-card mint"><span>Avance título</span><strong id="kpiGoal">0%</strong></article>
+    </section>
+
+    <section class="module-grid">
+      <button class="module-card habits" data-goto="habits"><span class="module-emoji">🚨</span><b>Hábitos</b><small>Alcohol y cigarrillo</small></button>
+      <button class="module-card money" data-goto="money"><span class="module-emoji">💰</span><b>Dinero</b><small>Salario, gastos y ahorro</small></button>
+      <button class="module-card tasks" data-goto="tasks"><span class="module-emoji">📝</span><b>Tareas</b><small>Casa y trabajo</small></button>
+      <button class="module-card body" data-goto="body"><span class="module-emoji">🧘</span><b>Cuerpo</b><small>Movimiento y respiración</small></button>
+      <button class="module-card study" data-goto="study"><span class="module-emoji">💻</span><b>Estudio</b><small>Programación y foco</small></button>
+      <button class="module-card day" data-goto="day"><span class="module-emoji">📖</span><b>Día</b><small>Diario y cierre</small></button>
+      <button class="module-card dashboard" data-goto="dashboard"><span class="module-emoji">📊</span><b>Dashboard</b><small>Vista tipo Power BI</small></button>
+    </section>
+  </section>
+
+  <section id="habits" class="screen">
+    <div class="screen-top"><button class="back-link" data-home>← Volver a inicio</button><button class="menu-link" data-open-menu>Registrar otra categoría</button></div>
+    <div class="screen-title"><h2>Hábitos</h2><p>Sin drama, sin mentiras. Reducir también es avanzar.</p></div>
+    <article class="feature-card white-card">
+      <h3>Alcohol</h3>
+      <label>Consumo de hoy (COP)<input id="alcoholToday" type="number" min="0" step="500" placeholder="0"/></label>
+      <label>Gasto típico diario (COP)<input id="alcoholTypical" type="number" min="0" step="500" placeholder="40000"/></label>
+      <div class="button-row"><button class="btn" id="saveAlcoholBtn">Guardar consumo</button><button class="btn danger" id="urgeBtn">Tengo ganas de tomar</button></div>
+      <p class="helper-text" id="alcoholFeedback"></p>
+    </article>
+
+    <article class="feature-card white-card">
+      <h3>Cigarrillo</h3>
+      <div class="dual-grid">
+        <label>Gasto habitual diario (COP)<input id="smokeTypical" type="number" min="0" step="500" placeholder="10000"/></label>
+        <label>Cigarrillos habituales por día<input id="smokeHabitual" type="number" min="1" step="1" placeholder="10"/></label>
+      </div>
+      <div class="counter-panel">
+        <button class="counter-btn ghost" id="smokeMinus">-1</button>
+        <div class="counter-core"><span>Cigarrillos hoy</span><strong id="smokeCount">0</strong></div>
+        <button class="counter-btn" id="smokePlus">+1</button>
+      </div>
+      <div class="button-row"><button class="btn secondary" id="saveSmokeBtn">Guardar cigarrillo</button></div>
+      <p class="helper-text" id="smokeFeedback"></p>
+    </article>
+  </section>
+
+  <section id="money" class="screen">
+    <div class="screen-top"><button class="back-link" data-home>← Volver a inicio</button><button class="menu-link" data-open-menu>Registrar otra categoría</button></div>
+    <div class="screen-title"><h2>Dinero</h2><p>Tu plata deja de desaparecer cuando se ve clara y completa.</p></div>
+    <article class="feature-card white-card">
+      <h3>Base del mes</h3>
+      <div class="dual-grid">
+        <label>Salario mensual (COP)<input id="salaryInput" type="number" min="0" step="10000" placeholder="0"/></label>
+        <label>Ahorro actual para el título (COP)<input id="goalSavedInput" type="number" min="0" step="10000" placeholder="0"/></label>
+      </div>
+      <div class="button-row"><button class="btn" id="saveSalaryBtn">Guardar datos base</button></div>
+      <div class="progress-box">
+        <div class="progress-head"><span>Meta título</span><strong id="goalLabel">0%</strong></div>
+        <div class="progress-bar"><span id="goalBar"></span></div>
+      </div>
+    </article>
+
+    <article class="feature-card white-card">
+      <h3>Registrar gasto</h3>
+      <div class="triple-grid">
+        <label>Categoría<select id="expenseCategory"><option value="mercado">Mercado</option><option value="arriendo">Arriendo</option><option value="servicios">Servicios</option><option value="deudas">Deudas</option><option value="ahorro">Ahorro</option><option value="transporte">Transporte</option><option value="salud">Salud</option><option value="estudio">Estudio</option><option value="alcohol">Alcohol</option><option value="tabaco">Tabaco</option><option value="otros">Otros</option></select></label>
+        <label>Valor<input id="expenseAmount" type="number" min="0" step="500" placeholder="0"/></label>
+        <label>Descripción<input id="expenseDesc" type="text" placeholder="Ej. frutas, gas, bolsillo Davivienda"/></label>
+      </div>
+      <div class="button-row"><button class="btn" id="saveExpenseBtn">Guardar gasto</button><button class="btn secondary" id="exportBackupBtn">Exportar respaldo</button></div>
+      <div id="expenseList" class="stack-list"></div>
+    </article>
+
+    <div class="dual-cards">
+      <article class="feature-card tinted-card rose"><h3>Dinero desperdiciado en alcohol y tabaco</h3><strong class="big-value" id="wasteValue">0 COP</strong></article>
+      <article class="feature-card tinted-card sky"><h3>Saldo mensual estimado</h3><strong class="big-value" id="balanceValue">0 COP</strong></article>
+    </div>
+  </section>
+
+  <section id="tasks" class="screen">
+    <div class="screen-top"><button class="back-link" data-home>← Volver a inicio</button><button class="menu-link" data-open-menu>Registrar otra categoría</button></div>
+    <div class="screen-title"><h2>Tareas</h2><p>Rutinas visuales, bonitas y fáciles de marcar.</p></div>
+
+    <div class="dual-cards compact-stats">
+      <article class="feature-card tinted-card peach"><h3>Casa completadas</h3><strong class="big-value" id="homeTasksDone">0/0</strong></article>
+      <article class="feature-card tinted-card violet"><h3>Trabajo completadas</h3><strong class="big-value" id="workTasksDone">0/0</strong></article>
+    </div>
+
+    <article class="feature-card white-card">
+      <h3>🏠 Tareas de casa</h3>
+      <div id="homeTasksList" class="task-card-list"></div>
+    </article>
+    <article class="feature-card white-card">
+      <h3>💼 Actividades laborales</h3>
+      <div id="workTasksList" class="task-card-list"></div>
+    </article>
+  </section>
+
+  <section id="body" class="screen">
+    <div class="screen-top"><button class="back-link" data-home>← Volver a inicio</button><button class="menu-link" data-open-menu>Registrar otra categoría</button></div>
+    <div class="screen-title"><h2>Cuerpo</h2><p>Desde casa y sin comprar nada raro.</p></div>
+    <article class="feature-card white-card">
+      <h3>Ejercicio rápido</h3>
+      <div class="task-card pastel-yellow complete-mini" data-body="move"><div><small>20–30 min</small><strong>Rutina de movimiento</strong><p>Movilidad + cardio suave + estiramiento.</p></div><button class="mini-check" id="bodyDoneBtn">✓</button></div>
+      <p class="helper-text" id="bodyText">Marca cuando la completes.</p>
+    </article>
+    <article class="feature-card white-card">
+      <h3>Respiración guiada</h3>
+      <div class="task-card pastel-blue"><div><small>5 ciclos</small><strong>Respira 4 · 4 · 6</strong><p>Inhala 4s, sostén 4s y exhala 6s.</p></div><button class="mini-check" id="breathBtn">▶</button></div>
+      <p class="helper-text" id="breathText">Usa esto cuando sientas ansiedad o cansancio.</p>
+    </article>
+  </section>
+
+  <section id="study" class="screen">
+    <div class="screen-top"><button class="back-link" data-home>← Volver a inicio</button><button class="menu-link" data-open-menu>Registrar otra categoría</button></div>
+    <div class="screen-title"><h2>Estudio</h2><p>Programación, constancia y avance visible.</p></div>
+    <article class="feature-card white-card">
+      <h3>Registrar estudio</h3>
+      <label>Tema<input id="studyTopic" type="text" placeholder="Ej. JavaScript funciones"/></label>
+      <label>Minutos<input id="studyMinutes" type="number" min="0" step="5" placeholder="20"/></label>
+      <div class="button-row"><button class="btn" id="saveStudyBtn">Guardar estudio</button></div>
+      <p class="helper-text" id="studyText"></p>
+    </article>
+  </section>
+
+  <section id="day" class="screen">
+    <div class="screen-top"><button class="back-link" data-home>← Volver a inicio</button><button class="menu-link" data-open-menu>Registrar otra categoría</button></div>
+    <div class="screen-title"><h2>Día</h2><p>Escribe, ordena y suelta.</p></div>
+    <article class="feature-card white-card">
+      <h3>Diario</h3>
+      <label>Título<input id="journalTitle" type="text" placeholder="¿Cómo fue tu día?"/></label>
+      <label>Entrada<textarea id="journalBody" rows="4" placeholder="¿Qué pasó hoy?"></textarea></label>
+      <div class="button-row"><button class="btn" id="saveJournalBtn">Guardar diario</button></div>
+    </article>
+    <article class="feature-card white-card">
+      <h3>Cierre del día</h3>
+      <label>Reflexión<textarea id="reflectionBody" rows="3" placeholder="¿Qué mejorarás mañana?"></textarea></label>
+      <div class="button-row"><button class="btn secondary" id="saveReflectionBtn">Guardar cierre</button></div>
+    </article>
+  </section>
+
+  <section id="dashboard" class="screen">
+    <div class="screen-top"><button class="back-link" data-home>← Volver a inicio</button><button class="menu-link" data-open-menu>Registrar otra categoría</button></div>
+    <div class="screen-title"><h2>Dashboard</h2><p>Vista general estilo Power BI, pero en tu app.</p></div>
+    <article class="dashboard-board">
+      <div class="board-kpis">
+        <div class="board-kpi"><span>Ahorro potencial hoy</span><strong id="dbRecovered">0 COP</strong></div>
+        <div class="board-kpi"><span>Gasto alcohol</span><strong id="dbAlcohol">0 COP</strong></div>
+        <div class="board-kpi"><span>Gasto tabaco</span><strong id="dbSmoke">0 COP</strong></div>
+        <div class="board-kpi"><span>Estudio acumulado</span><strong id="dbStudy">0 min</strong></div>
+      </div>
+      <div class="board-charts">
+        <div class="chart-card">
+          <h3>Hábitos vs meta</h3>
+          <div id="habitBars"></div>
+        </div>
+        <div class="chart-card">
+          <h3>Gastos por categoría</h3>
+          <div id="expenseBars"></div>
+        </div>
+        <div class="chart-card">
+          <h3>Rendimiento semanal</h3>
+          <div id="weeklySummary" class="summary-list"></div>
+        </div>
+      </div>
+    </article>
+  </section>
+</main>
+
+<button class="fab-menu" id="fabMenuBtn" title="Abrir menú rápido"><img src="./goma-icon.png" alt="Goma"/></button>
+
+<div class="quick-menu hidden" id="quickMenuOverlay">
+  <div class="quick-menu-card">
+    <div class="quick-header"><h3>¿Qué quieres abrir?</h3><button class="close-x" data-close-menu>✕</button></div>
+    <div class="quick-grid">
+      <button data-goto="home">🏠 Inicio</button>
+      <button data-goto="habits">🚨 Hábitos</button>
+      <button data-goto="money">💰 Dinero</button>
+      <button data-goto="tasks">📝 Tareas</button>
+      <button data-goto="body">🧘 Cuerpo</button>
+      <button data-goto="study">💻 Estudio</button>
+      <button data-goto="day">📖 Día</button>
+      <button data-goto="dashboard">📊 Dashboard</button>
+    </div>
+  </div>
+</div>
+
+<div class="message-bubble hidden" id="messageBubble">
+  <div class="bubble-head"><span>Mensaje de Goma</span><button id="closeBubble">✕</button></div>
+  <p id="bubbleText"></p>
+</div>
+<div id="pawLayer"></div>
+<div class="toast" id="toast"></div>
+<script src="./app.js" defer></script>
+</body></html>

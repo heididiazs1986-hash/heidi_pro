@@ -2,13 +2,13 @@
   "name": "Heidi Life OS",
   "short_name": "Heidi OS",
   "id": "/",
-  "start_url": "./index.html?v=final4",
+  "start_url": "./index.html?v=polished1",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#f7e4f1",
-  "theme_color": "#a285ee",
-  "description": "Sistema personal PWA para hábitos, dinero, tareas, cuerpo, estudio, día y panel.",
+  "background_color": "#f8e6f2",
+  "theme_color": "#a186ee",
+  "description": "App personal para hábitos, dinero, tareas, cuerpo, estudio, diario y dashboard.",
   "icons": [
     {
       "src": "./icon-180.png",
