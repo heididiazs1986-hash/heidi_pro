@@ -1,0 +1,5 @@
+Heidi Life OS — licencias de recursos incluidos
+
+Íconos: Lucide (https://lucide.dev) — licencia ISC.
+Tipografía Inter — SIL Open Font License 1.1 (https://rsms.me/inter).
+Tipografía Lora — SIL Open Font License 1.1 (Cyreal, https://fonts.google.com/specimen/Lora).

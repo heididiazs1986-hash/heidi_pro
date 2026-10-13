@@ -3,291 +3,399 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-<meta name="theme-color" content="#8b5cff"/>
-<script src="./theme.js"></script>
-<title>Heidi, now you</title>
+<meta name="theme-color" content="#f7f2f1"/>
+<title>Heidi Life OS</title>
 <link rel="manifest" href="./manifest.json"/>
 <link rel="icon" href="./icon-192.png"/>
 <link rel="apple-touch-icon" href="./icon-180.png"/>
-<link rel="stylesheet" href="./styles.css"/>
+<script src="./icons.js?v=3"></script>
+<script src="./theme.js?v=3"></script>
+<link rel="stylesheet" href="./styles.css?v=3"/>
 </head>
 <body>
-<header class="app-header">
-  <div class="header-brand">
-    <img src="./goma-icon.png" alt="Goma" class="brand-icon"/>
-    <div>
-      <h1>Heidi, now you💜</h1>
-      <p id="todayLabel">Cargando fecha...</p>
-    </div>
-  </div>
-  <div class="header-actions"><div class="header-status" id="statusPill">Día en construcción</div><button class="theme-btn" id="themeBtn" aria-label="Cambiar a modo oscuro">🌙</button></div>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><img src="./goma-icon.png" alt="Goma"/><div><b>Heidi</b><small>Life OS</small></div></div>
+  <nav class="snav" id="snav" aria-label="Secciones"></nav>
+  <div class="side-foot">Tus datos viven solo en este dispositivo.</div>
+</aside>
+
+<div class="main">
+<header class="topbar">
+  <div class="topbar-brand"><img src="./goma-icon.png" alt="Goma"/><span>Heidi</span></div>
+  <div class="topbar-date" id="todayLabel">Cargando fecha...</div>
+  <div class="topbar-actions"><span class="status" id="statusPill">Día en construcción</span><button class="icon-btn" id="themeBtn" aria-label="Cambiar tema"></button></div>
 </header>
 
 <main class="app-shell">
-  <section id="home" class="screen active">
-    <div class="screen-title">
-      <h2>Inicio</h2>
-      <p>Tu centro de control personal. Elige qué quieres trabajar hoy.</p>
-    </div>
-    <article class="hero-card">
-      <div>
-        <h3 id="homeHeroTitle">Tu mejora se construye en pequeño</h3>
-        <p id="homeHeroText">Cargando resumen...</p>
-      </div>
-      <button class="btn secondary" id="recoveredToGoalBtn">Enviar recuperado al título</button>
-    </article>
-    <section class="kpi-grid">
-      <article class="kpi-card lilac"><span>Racha sin alcohol</span><strong id="kpiStreak">0 días</strong></article>
-      <article class="kpi-card blue"><span>Cigarrillos hoy</span><strong id="kpiCigs">0</strong></article>
-      <article class="kpi-card pink"><span>Dinero recuperado hoy</span><strong id="kpiRecovered">0 COP</strong></article>
-      <article class="kpi-card mint"><span>Avance título</span><strong id="kpiGoal">0%</strong></article>
-      <article class="kpi-card amber"><span>Hábitos hoy</span><strong id="kpiHabits">0/0</strong></article>
-      <article class="kpi-card fire"><span>Mejor racha</span><strong id="kpiBest">0 día(s)</strong></article>
-    </section>
-    <section class="module-grid">
-      <button class="module-card myhabits" data-goto="myhabits"><span>✅</span><b>Mis hábitos</b><small>Casillas, rachas y metas</small></button>
-      <button class="module-card habits" data-goto="habits"><span>🚨</span><b>Reducir</b><small>Alcohol y cigarrillo</small></button>
-      <button class="module-card calm" data-goto="calm"><span>🌬️</span><b>Calma</b><small>Ansiedad y respiración</small></button>
-      <button class="module-card tasks" data-goto="tasks"><span>📝</span><b>Tareas</b><small>Casa y trabajo</small></button>
-      <button class="module-card money" data-goto="money"><span>💰</span><b>Dinero</b><small>Salario, gastos y ahorro</small></button>
-      <button class="module-card visual" data-goto="visual"><span>📸</span><b>Proceso</b><small>Registro fotográfico</small></button>
-      <button class="module-card library" data-goto="library"><span>🎧</span><b>Biblioteca</b><small>Podcasts y música</small></button>
-      <button class="module-card body" data-goto="body"><span>🧘</span><b>Cuerpo</b><small>Movimiento y respiración</small></button>
-      <button class="module-card study" data-goto="study"><span>💻</span><b>Estudio</b><small>Programación y foco</small></button>
-      <button class="module-card sleep" data-goto="sleep"><span>🌙</span><b>Sueño</b><small>Insomnio y cuidado</small></button>
-      <button class="module-card day" data-goto="day"><span>📖</span><b>Día</b><small>Diario y cierre</small></button>
-      <button class="module-card dashboard" data-goto="dashboard"><span>📊</span><b>Dashboard</b><small>Vista tipo Power BI</small></button>
-      <button class="module-card backup" data-goto="backup"><span>🗂️</span><b>Respaldo</b><small>ZIP, CSV, JSON y fotos</small></button>
-    </section>
-  </section>
+<div class="subtabs hidden" id="subtabs"></div>
 
-  <section id="habits" class="screen">
-    <div class="screen-top"><button data-home>← Volver a inicio</button><button data-open-menu>Registrar otra categoría</button></div>
-    <div class="screen-title"><h2>Reducir</h2><p>Alcohol y cigarrillo. Sin drama, sin mentiras: reducir también es avanzar.</p></div>
+<!-- HOY -->
+<section id="home" class="screen active">
+  <div class="screen-title"><div class="eyebrow" id="homeEyebrow">Hoy</div><h2 id="homeGreeting">Hola, Heidi</h2><p>Lo importante de hoy en un solo lugar.</p></div>
+  <article class="feature-card">
+    <div class="card-head"><h3 id="homeHeroTitle">Tu mejora se construye en pequeño</h3></div>
+    <p class="card-sub" id="homeHeroText" style="margin-bottom:14px">Cargando resumen...</p>
+    <div class="button-row"><button class="btn secondary sm" id="recoveredToGoalBtn">Enviar recuperado al título</button></div>
+  </article>
+  <section class="kpi-grid">
+    <article class="kpi-card"><span>Hábitos hoy</span><strong id="kpiHabits">0/0</strong></article>
+    <article class="kpi-card"><span>Mejor racha</span><strong id="kpiBest">0 día(s)</strong></article>
+    <article class="kpi-card"><span>Racha sin alcohol</span><strong id="kpiStreak">0 días</strong></article>
+    <article class="kpi-card"><span>Cigarrillos hoy</span><strong id="kpiCigs">0</strong></article>
+    <article class="kpi-card"><span>Recuperado hoy</span><strong id="kpiRecovered">0 COP</strong></article>
+    <article class="kpi-card"><span>Avance título</span><strong id="kpiGoal">0%</strong></article>
+  </section>
+  <div class="two-col">
     <article class="feature-card">
-      <h3>Alcohol</h3>
+      <div class="card-head"><h3>Hábitos de hoy</h3><button class="link-btn" data-nav="myhabits">Ver todos</button></div>
+      <div class="list" id="homeHabits"></div>
+    </article>
+    <div class="stack">
+      <article class="feature-card"><div class="card-head"><h3>Agua</h3><button class="link-btn" data-nav="food">Mi día</button></div><div id="homeWater"></div></article>
+      <article class="feature-card"><div class="card-head"><h3>Próximas tareas</h3><button class="link-btn" data-nav="tasks">Ver todas</button></div><div class="list" id="homeUpcoming"></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- HÁBITOS -->
+<section id="myhabits" class="screen">
+  <div class="screen-title"><h2>Mis hábitos</h2><p>Marca la casilla y cuida la racha. Si se rompe, se retoma hoy, sin castigo.</p></div>
+  <div class="stats-grid">
+    <article class="feature-card mini-stat"><span>Hoy</span><strong id="mhStatToday">0/0</strong></article>
+    <article class="feature-card mini-stat"><span>Esta semana</span><strong id="mhStatWeek">0%</strong></article>
+    <article class="feature-card mini-stat"><span>Mejor racha</span><strong id="mhStatBest">—</strong></article>
+    <article class="feature-card mini-stat"><span>Este mes</span><strong id="mhStatMonth">0%</strong></article>
+  </div>
+  <div class="two-col">
+    <article class="feature-card"><div class="card-head"><h3>Hoy</h3></div><div id="habitToday" class="list"></div></article>
+    <div class="stack">
+      <article class="feature-card">
+        <div class="card-head"><h3 id="mhFormTitle">Nuevo hábito</h3><span class="card-sub" id="mhCount"></span></div>
+        <label>Nombre<input id="mhName" type="text" placeholder="Ej. Leer 10 minutos" maxlength="40"/></label>
+        <span class="field-label">Ícono</span>
+        <div class="icon-picker" id="mhIcons"></div>
+        <div class="dual-grid">
+          <label>Meta por semana<select id="mhGoal"><option value="7">7 días</option><option value="6">6 días</option><option value="5">5 días</option><option value="4">4 días</option><option value="3">3 días</option><option value="2">2 días</option><option value="1">1 día</option></select></label>
+          <label>¿Cómo se marca?<select id="mhLink"></select></label>
+        </div>
+        <div class="button-row"><button class="btn" id="mhAddBtn">Crear hábito</button><button class="btn secondary hidden" id="mhCancelBtn">Cancelar</button></div>
+      </article>
+      <article class="feature-card"><div class="card-head"><h3>Tus más constantes</h3></div><div id="habitInsights"></div></article>
+    </div>
+  </div>
+  <article class="feature-card">
+    <div class="card-head"><h3>Mi mes</h3></div>
+    <div class="mh-nav"><button id="mhPrev" aria-label="Mes anterior" data-icon="chevron-left" data-size="18"></button><span id="mhMonthLabel"></span><button id="mhNext" aria-label="Mes siguiente" data-icon="chevron-right" data-size="18"></button></div>
+    <div class="hg-wrap" id="habitGrid"></div>
+    <div class="legend-line"><span><i style="background:var(--primary)"></i>Marcado por ti</span><span><i style="background:var(--sage)"></i>Marcado desde otra sección</span></div>
+    <p class="mh-note">Puedes tocar días pasados para completar lo que olvidaste.</p>
+  </article>
+</section>
+
+<section id="habits" class="screen">
+  <div class="screen-title"><h2>Reducir</h2><p>Alcohol y cigarrillo. Sin drama y sin mentiras: reducir también es avanzar.</p></div>
+  <div class="two-col">
+    <article class="feature-card">
+      <div class="card-head"><h3>Alcohol</h3></div>
       <label>Consumo de hoy (COP)<input id="alcoholToday" type="number" min="0" step="500" placeholder="0"/></label>
       <label>Gasto típico diario (COP)<input id="alcoholTypical" type="number" min="0" step="500" placeholder="40000"/></label>
       <div class="button-row"><button class="btn" id="saveAlcoholBtn">Guardar consumo</button><button class="btn danger" id="urgeBtn">Tengo ganas de tomar</button></div>
       <p class="helper-text" id="alcoholFeedback"></p>
     </article>
     <article class="feature-card">
-      <h3>Cigarrillo</h3>
+      <div class="card-head"><h3>Cigarrillo</h3></div>
       <div class="dual-grid">
         <label>Gasto habitual diario (COP)<input id="smokeTypical" type="number" min="0" step="500" placeholder="10000"/></label>
         <label>Cigarrillos habituales por día<input id="smokeHabitual" type="number" min="1" step="1" placeholder="10"/></label>
       </div>
       <div class="counter-panel">
-        <button class="counter-btn ghost" id="smokeMinus">-1</button>
+        <button class="counter-btn ghost" id="smokeMinus" aria-label="Restar uno">−1</button>
         <div class="counter-core"><span>Cigarrillos hoy</span><strong id="smokeCount">0</strong></div>
-        <button class="counter-btn" id="smokePlus">+1</button>
+        <button class="counter-btn" id="smokePlus" aria-label="Sumar uno">+1</button>
       </div>
       <div class="button-row"><button class="btn secondary" id="saveSmokeBtn">Guardar cigarrillo</button></div>
       <p class="helper-text" id="smokeFeedback"></p>
     </article>
-  </section>
+  </div>
+</section>
 
-  <section id="myhabits" class="screen">
-    <div class="screen-top"><button data-home>← Volver a inicio</button><button data-open-menu>Registrar otra categoría</button></div>
-    <div class="screen-title"><h2>Mis hábitos</h2><p>Marca la casilla, no rompas la racha. Si se rompe, retomamos hoy, sin castigo.</p></div>
-    <div class="stats-grid">
-      <article class="feature-card mini-stat sky"><span>Hoy</span><strong id="mhStatToday">0/0</strong></article>
-      <article class="feature-card mini-stat violet"><span>Esta semana</span><strong id="mhStatWeek">0%</strong></article>
-      <article class="feature-card mini-stat peach"><span>Mejor racha</span><strong id="mhStatBest">—</strong></article>
-      <article class="feature-card mini-stat rose"><span>Este mes</span><strong id="mhStatMonth">0%</strong></article>
+<!-- ALIMENTACIÓN -->
+<section id="food" class="screen">
+  <div class="screen-title"><h2>Mi día de alimentación</h2><p>Agua, comidas y pequeñas decisiones que suman. No se trata de perfección.</p></div>
+  <div class="two-col">
+    <div class="stack">
+      <article class="feature-card">
+        <div class="card-head"><h3>Agua</h3><span class="card-sub" id="waterSub"></span></div>
+        <div class="water-main"><span class="big-num" id="waterNum">0</span><span class="card-sub" id="waterOf">de 8 vasos</span></div>
+        <div class="glasses" id="waterGlasses"></div>
+        <div class="button-row"><button class="btn sm" id="waterPlus">Un vaso más</button><button class="btn secondary sm" id="waterMinus">Quitar uno</button></div>
+        <div class="inline-field"><span class="card-sub">Meta diaria</span><select id="waterGoal"><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>12</option></select><span class="card-sub">vasos</span></div>
+      </article>
+      <article class="feature-card">
+        <div class="card-head"><h3>Calidad del día</h3><span class="card-sub" id="qualSub"></span></div>
+        <div class="qlist" id="foodQuality"></div>
+        <p class="helper-text">Con 4 de 5 se marca el hábito "Alimentarme bien".</p>
+      </article>
+    </div>
+    <div class="stack">
+      <article class="feature-card">
+        <div class="card-head"><h3>Comidas de hoy</h3></div>
+        <div class="dual-grid">
+          <label>Momento<select id="mealType"><option>Desayuno</option><option>Media mañana</option><option>Almuerzo</option><option>Merienda</option><option>Cena</option></select></label>
+          <label>¿Qué comiste?<input id="mealText" type="text" placeholder="Ej. arepa con huevo y fruta" maxlength="80"/></label>
+        </div>
+        <div class="button-row"><button class="btn sm" id="mealAdd">Agregar comida</button></div>
+        <div class="list" id="mealList" style="margin-top:14px"></div>
+      </article>
+      <article class="feature-card">
+        <div class="card-head"><h3>Plato equilibrado</h3></div>
+        <div class="plate">
+          <div><span class="p-ic" data-icon="carrot" data-size="18"></span><p><b>Mitad verduras y frutas.</b> <span>Varias de colores distintos.</span></p></div>
+          <div><span class="p-ic" data-icon="wheat" data-size="18"></span><p><b>Un cuarto de grano o tubérculo.</b> <span>Arroz, papa, yuca, arepa, avena.</span></p></div>
+          <div><span class="p-ic" data-icon="utensils" data-size="18"></span><p><b>Un cuarto de proteína.</b> <span>Huevo, pollo, pescado, lentejas, fríjol.</span></p></div>
+        </div>
+      </article>
+    </div>
+  </div>
+  <article class="feature-card">
+    <div class="card-head"><h3>Últimos 7 días</h3></div>
+    <div class="week" id="foodWeek"></div>
+    <div class="legend-line"><span><i style="background:var(--sea)"></i>Vasos de agua</span><span><i style="background:var(--primary)"></i>Calidad del día</span></div>
+  </article>
+</section>
+
+<section id="foodplan" class="screen">
+  <div class="screen-title"><h2>Semana y mercado</h2><p>Planear lo que vas a comer es la mitad del trabajo para comer bien.</p></div>
+  <div class="two-col">
+    <article class="feature-card">
+      <div class="card-head"><h3>Lista de mercado</h3><span class="card-sub" id="shopSub"></span></div>
+      <div class="add-row"><label>Producto<input id="shopText" type="text" placeholder="Ej. espinaca, huevos, avena" maxlength="60"/></label><button class="btn" id="shopAdd">Agregar</button></div>
+      <div class="list" id="shopList"></div>
+      <div class="button-row" style="margin-top:14px"><button class="btn secondary sm" id="shopClear">Quitar los comprados</button></div>
+    </article>
+    <div class="stack">
+      <article class="feature-card">
+        <div class="card-head"><h3>Ideas para la semana</h3></div>
+        <div class="plate" id="foodIdeas"></div>
+      </article>
+      <article class="feature-card">
+        <div class="card-head"><h3>Gasto en mercado</h3></div>
+        <strong class="big-value" id="marketSpent">0 COP</strong>
+        <p class="helper-text">Suma de los gastos de categoría "mercado" registrados en Dinero.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- BIENESTAR -->
+<section id="calm" class="screen">
+  <div class="screen-title"><h2>Calma</h2><p>Ansiedad, impulsos y respiración guiada antes de caer en alcohol o cigarrillo.</p></div>
+  <div class="two-col">
+    <div class="stack">
+      <article class="feature-card">
+        <div class="card-head"><h3>Modo impulso</h3></div>
+        <p class="card-sub" style="margin-bottom:14px">Cuando aparezca ansiedad o ganas de tomar o fumar, entra aquí primero.</p>
+        <div class="button-row"><button class="btn danger" id="panicBtn">Estoy en ansiedad o impulso</button><button class="btn secondary" id="markCravingBtn">Ya pasó el impulso</button></div>
+      </article>
+      <article class="feature-card">
+        <div class="card-head"><h3>Técnica de 5 minutos</h3></div>
+        <div class="list" id="calmSteps"></div>
+      </article>
+    </div>
+    <div class="stack">
+      <article class="feature-card">
+        <div class="card-head"><h3>Respiración guiada</h3></div>
+        <div class="dual-grid">
+          <label>Rutina<select id="breathRoutine"><option value="446">Inhala 4 · sostén 4 · exhala 6</option><option value="box">Caja 4 · 4 · 4 · 4</option><option value="simple">Inhala 3 · exhala 5</option></select></label>
+          <label>Ciclos<select id="breathCycles"><option value="3">3 ciclos</option><option value="5" selected>5 ciclos</option><option value="8">8 ciclos</option></select></label>
+        </div>
+        <div class="breath-orb-card"><div class="breath-orb" id="breathOrb">Respira</div><div><strong id="breathPhase">Lista para empezar</strong><span id="breathCount">Elige rutina y toca iniciar.</span></div></div>
+        <div class="button-row"><button class="btn" id="startBreathBtn">Iniciar</button><button class="btn secondary" id="stopBreathBtn">Detener</button><button class="btn secondary" id="doneBreathBtn">Ya lo hice</button></div>
+      </article>
+      <article class="feature-card">
+        <div class="card-head"><h3>Rituales naturales de apoyo</h3></div>
+        <div class="ritual-grid" id="calmRituals"></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="body" class="screen">
+  <div class="screen-title"><h2>Movimiento</h2><p>Desde casa y sin comprar nada raro.</p></div>
+  <article class="feature-card">
+    <div class="card-head"><h3>Rutina rápida</h3><span class="card-sub">20 a 30 min</span></div>
+    <div class="task-card pastel-yellow"><div><strong>Movilidad, cardio suave y estiramiento</strong><p>Completa la rutina del día y se marca tu hábito de movimiento.</p></div><button class="mini-check" id="bodyDoneBtn" aria-label="Marcar rutina" data-icon="check" data-size="18"></button></div>
+    <p class="helper-text" id="bodyText"></p>
+  </article>
+</section>
+
+<section id="sleep" class="screen">
+  <div class="screen-title"><h2>Sueño y cuidado</h2><p>Insomnio, rutina nocturna y cuidado natural.</p></div>
+  <div class="two-col">
+    <article class="feature-card">
+      <div class="card-head"><h3>Control de sueño</h3></div>
+      <div class="triple-grid"><label>Hora en que te levantaste<input id="wakeTime" type="time"/></label><label>Hora en que te dormiste<input id="sleepTime" type="time"/></label><label>Meta para dormir<input id="sleepGoal" type="time" value="23:30"/></label></div>
+      <div class="dual-grid"><label>Calidad<select id="sleepQuality"><option value="sin registrar">Sin registrar</option><option value="bien">Bien</option><option value="regular">Regular</option><option value="mal">Mal</option></select></label><label>¿Pantalla en cama?<select id="screenInBed"><option value="no">No</option><option value="sí">Sí</option></select></label></div>
+      <div class="button-row"><button class="btn" id="saveSleepBtn">Guardar sueño</button><button class="btn secondary" id="sleepScoldBtn">Aterrízame</button></div><p id="sleepFeedback" class="helper-text"></p>
+    </article>
+    <article class="feature-card">
+      <div class="card-head"><h3>Cuidado natural</h3></div>
+      <div class="dual-grid"><label>Necesito ayuda con<select id="careTopic"><option value="sueño">Sueño</option><option value="ansiedad">Ansiedad</option><option value="cabello">Caída de cabello</option><option value="piel">Piel</option><option value="alimentación">Alimentación</option><option value="energía">Energía</option></select></label><label>Estado de hoy<select id="careState"><option value="normal">Normal</option><option value="cansada">Cansada</option><option value="ansiosa">Ansiosa</option><option value="desordenada">Desordenada</option></select></label></div>
+      <div class="button-row"><button class="btn" id="careTipBtn">Dame una recomendación</button></div><div class="care-card" id="careTipBox"></div>
+    </article>
+  </div>
+</section>
+
+<section id="library" class="screen">
+  <div class="screen-title"><h2>Biblioteca</h2><p>Videos, música y podcasts gratuitos para dormir, activarte o volver a ti.</p></div>
+  <div class="two-col">
+    <article class="feature-card"><div class="card-head"><h3>Elegir intención</h3></div><div class="ritual-grid" id="mediaLibrary"></div></article>
+    <article class="feature-card"><div class="card-head"><h3>Escuchado o practicado</h3></div><div id="mediaHistory" class="list"></div></article>
+  </div>
+</section>
+
+<!-- PLANEAR -->
+<section id="tasks" class="screen">
+  <div class="screen-title"><h2>Tareas</h2><p>Casa con lista visual. Trabajo con fecha final, prioridad y avance.</p></div>
+  <div class="stats-grid">
+    <article class="feature-card mini-stat"><span>Casa completadas</span><strong id="homeTasksDone">0/0</strong></article>
+    <article class="feature-card mini-stat"><span>Laborales activas</span><strong id="workTasksActive">0</strong></article>
+    <article class="feature-card mini-stat"><span>Vencidas</span><strong id="workTasksOverdue">0</strong></article>
+    <article class="feature-card mini-stat"><span>Vence pronto</span><strong id="workTasksSoon">0</strong></article>
+  </div>
+  <div class="two-col">
+    <div class="stack">
+      <article class="feature-card"><div class="card-head"><h3>Casa</h3></div><div id="homeTasksList" class="list"></div></article>
+    </div>
+    <div class="stack">
+      <article class="feature-card">
+        <div class="card-head"><h3>Nueva tarea laboral</h3></div>
+        <div class="dual-grid">
+          <label>Tarea<input id="workTaskTitle" type="text" placeholder="Ej. Diagnóstico sector 7-8"/></label>
+          <label>Fecha final<input id="workTaskDue" type="date"/></label>
+        </div>
+        <div class="dual-grid">
+          <label>Prioridad<select id="workTaskPriority"><option value="alta">Alta</option><option value="media" selected>Media</option><option value="baja">Baja</option></select></label>
+          <label>Descripción<input id="workTaskDesc" type="text" placeholder="Ej. enviar correo de órdenes pendientes"/></label>
+        </div>
+        <div class="button-row"><button class="btn" id="saveWorkTaskBtn">Guardar tarea</button><button class="btn secondary" id="clearDefaultWorkBtn">Limpiar laborales viejas</button></div>
+      </article>
+      <article class="feature-card"><div class="card-head"><h3>Actividades laborales</h3></div><div id="workTasksList" class="list"></div></article>
+    </div>
+  </div>
+</section>
+
+<section id="study" class="screen">
+  <div class="screen-title"><h2>Estudio</h2><p>Programación, constancia y avance visible.</p></div>
+  <article class="feature-card"><div class="card-head"><h3>Registrar estudio</h3></div><label>Tema<input id="studyTopic" type="text" placeholder="Ej. JavaScript funciones"/></label><label>Minutos<input id="studyMinutes" type="number" min="0" step="5"/></label><div class="button-row"><button class="btn" id="saveStudyBtn">Guardar estudio</button></div><p class="helper-text" id="studyText"></p></article>
+</section>
+
+<!-- FINANZAS -->
+<section id="money" class="screen">
+  <div class="screen-title"><h2>Dinero</h2><p>Tu plata deja de desaparecer cuando se ve clara y completa.</p></div>
+  <div class="two-col">
+    <div class="stack">
+      <article class="feature-card">
+        <div class="card-head"><h3>Base del mes</h3></div>
+        <div class="dual-grid">
+          <label>Salario mensual (COP)<input id="salaryInput" type="number" min="0" step="10000"/></label>
+          <label>Ahorro actual para el título (COP)<input id="goalSavedInput" type="number" min="0" step="10000"/></label>
+        </div>
+        <div class="button-row"><button class="btn" id="saveSalaryBtn">Guardar datos base</button></div>
+        <div class="progress-box"><div class="progress-head"><span>Meta título</span><strong id="goalLabel">0%</strong></div><div class="progress-bar"><span id="goalBar"></span></div></div>
+      </article>
+      <div class="dual-cards"><article class="feature-card"><span class="eyebrow">Gastado en alcohol y tabaco</span><strong class="big-value" id="wasteValue">0 COP</strong></article><article class="feature-card"><span class="eyebrow">Saldo mensual estimado</span><strong class="big-value" id="balanceValue">0 COP</strong></article></div>
     </div>
     <article class="feature-card">
-      <h3>✅ Hoy</h3>
-      <div id="habitToday" class="task-card-list"></div>
-    </article>
-    <article class="feature-card">
-      <h3>🗓️ Mi mes</h3>
-      <div class="mh-nav"><button id="mhPrev" aria-label="Mes anterior">‹</button><span id="mhMonthLabel"></span><button id="mhNext" aria-label="Mes siguiente">›</button></div>
-      <div class="hg-wrap" id="habitGrid"></div>
-      <p class="mh-note">Verde: lo marcaste tú. Morado: se marcó solo desde otra sección. Puedes tocar días pasados para completar lo que olvidaste.</p>
-    </article>
-    <article class="feature-card violet">
-      <h3>🏆 Tus hábitos más constantes</h3>
-      <div id="habitInsights"></div>
-    </article>
-    <article class="feature-card">
-      <h3>➕ Nuevo hábito <small class="helper-text" id="mhCount"></small></h3>
-      <label>Nombre<input id="mhName" type="text" placeholder="Ej. Leer 10 minutos" maxlength="40"/></label>
-      <div class="dual-grid">
-        <label>Ícono<select id="mhEmoji"></select></label>
-        <label>Meta por semana<select id="mhGoal"><option value="7">7 días</option><option value="6">6 días</option><option value="5">5 días</option><option value="4">4 días</option><option value="3">3 días</option><option value="2">2 días</option><option value="1">1 día</option></select></label>
-      </div>
-      <label>¿Cómo se marca?<select id="mhLink"></select></label>
-      <div class="button-row"><button class="btn" id="mhAddBtn">Crear hábito</button></div>
-    </article>
-  </section>
-
-  <section id="calm" class="screen">
-    <div class="screen-top"><button data-home>← Volver a inicio</button><button data-open-menu>Registrar otra categoría</button></div>
-    <div class="screen-title"><h2>Calma</h2><p>Ansiedad, impulsos y respiración guiada antes de caer en alcohol o cigarrillo.</p></div>
-    <article class="feature-card calm-card">
-      <h3>🚨 Modo impulso</h3>
-      <p class="helper-text">Cuando aparezca ansiedad, ganas de tomar o fumar, entra aquí primero.</p>
-      <div class="button-row"><button class="btn danger" id="panicBtn">Estoy en ansiedad / impulso</button><button class="btn secondary" id="markCravingBtn">Ya pasó el impulso</button></div>
-    </article>
-    <article class="feature-card">
-      <h3>🌬️ Respiración guiada</h3>
-      <div class="dual-grid">
-        <label>Rutina<select id="breathRoutine"><option value="446">Inhala 4 · sostén 4 · exhala 6</option><option value="box">Caja 4 · 4 · 4 · 4</option><option value="simple">Inhala 3 · exhala 5</option></select></label>
-        <label>Ciclos<select id="breathCycles"><option value="3">3 ciclos</option><option value="5" selected>5 ciclos</option><option value="8">8 ciclos</option></select></label>
-      </div>
-      <div class="breath-orb-card"><div class="breath-orb" id="breathOrb">Respira</div><div><strong id="breathPhase">Lista para empezar</strong><span id="breathCount">Elige rutina y toca iniciar.</span></div></div>
-      <div class="button-row"><button class="btn" id="startBreathBtn">Iniciar respiración</button><button class="btn secondary" id="stopBreathBtn">Detener</button><button class="btn secondary" id="doneBreathBtn">Ya lo hice</button></div>
-    </article>
-    <article class="feature-card">
-      <h3>🧊 Técnica anti-impulso de 5 minutos</h3>
-      <div class="task-card-list" id="calmSteps"></div>
-    </article>
-    <article class="feature-card">
-      <h3>🍵 Rituales naturales de apoyo</h3>
-      <div class="ritual-grid" id="calmRituals"></div>
-    </article>
-  </section>
-
-  <section id="tasks" class="screen">
-    <div class="screen-top"><button data-home>← Volver a inicio</button><button data-open-menu>Registrar otra categoría</button></div>
-    <div class="screen-title"><h2>Tareas</h2><p>Casa con checklist visual. Trabajo con fecha final, prioridad y avance.</p></div>
-    <div class="stats-grid">
-      <article class="feature-card mini-stat peach"><span>Casa completadas</span><strong id="homeTasksDone">0/0</strong></article>
-      <article class="feature-card mini-stat violet"><span>Laborales activas</span><strong id="workTasksActive">0</strong></article>
-      <article class="feature-card mini-stat rose"><span>Vencidas</span><strong id="workTasksOverdue">0</strong></article>
-      <article class="feature-card mini-stat sky"><span>Vence pronto</span><strong id="workTasksSoon">0</strong></article>
-    </div>
-    <article class="feature-card">
-      <h3>🏠 Tareas de casa</h3>
-      <div id="homeTasksList" class="task-card-list"></div>
-    </article>
-    <article class="feature-card">
-      <h3>💼 Crear tarea laboral</h3>
-      <div class="dual-grid">
-        <label>Tarea<input id="workTaskTitle" type="text" placeholder="Ej. Diagnóstico sector 7-8"/></label>
-        <label>Fecha final<input id="workTaskDue" type="date"/></label>
-      </div>
-      <div class="dual-grid">
-        <label>Prioridad<select id="workTaskPriority"><option value="alta">Alta</option><option value="media" selected>Media</option><option value="baja">Baja</option></select></label>
-        <label>Descripción<input id="workTaskDesc" type="text" placeholder="Ej. enviar correo de órdenes pendientes"/></label>
-      </div>
-      <div class="button-row"><button class="btn" id="saveWorkTaskBtn">Guardar tarea laboral</button><button class="btn secondary" id="clearDefaultWorkBtn">Limpiar laborales viejas</button></div>
-    </article>
-    <article class="feature-card">
-      <h3>💼 Actividades laborales</h3>
-      <div id="workTasksList" class="task-card-list"></div>
-    </article>
-  </section>
-
-  <section id="money" class="screen">
-    <div class="screen-top"><button data-home>← Volver a inicio</button><button data-open-menu>Registrar otra categoría</button></div>
-    <div class="screen-title"><h2>Dinero</h2><p>Tu plata deja de desaparecer cuando se ve clara y completa.</p></div>
-    <article class="feature-card">
-      <h3>Base del mes</h3>
-      <div class="dual-grid">
-        <label>Salario mensual (COP)<input id="salaryInput" type="number" min="0" step="10000"/></label>
-        <label>Ahorro actual para el título (COP)<input id="goalSavedInput" type="number" min="0" step="10000"/></label>
-      </div>
-      <div class="button-row"><button class="btn" id="saveSalaryBtn">Guardar datos base</button></div>
-      <div class="progress-box"><div class="progress-head"><span>Meta título</span><strong id="goalLabel">0%</strong></div><div class="progress-bar"><span id="goalBar"></span></div></div>
-    </article>
-    <article class="feature-card">
-      <h3>Registrar gasto</h3>
+      <div class="card-head"><h3>Registrar gasto</h3></div>
       <div class="triple-grid">
         <label>Categoría<select id="expenseCategory"><option value="mercado">Mercado</option><option value="arriendo">Arriendo</option><option value="servicios">Servicios</option><option value="deudas">Deudas</option><option value="ahorro">Ahorro</option><option value="transporte">Transporte</option><option value="salud">Salud</option><option value="estudio">Estudio</option><option value="alcohol">Alcohol</option><option value="tabaco">Tabaco</option><option value="otros">Otros</option></select></label>
         <label>Valor<input id="expenseAmount" type="number" min="0" step="500"/></label>
-        <label>Descripción<input id="expenseDesc" type="text" placeholder="Ej. frutas, gas, bolsillo Davivienda"/></label>
+        <label>Descripción<input id="expenseDesc" type="text" placeholder="Ej. frutas, gas"/></label>
       </div>
       <div class="button-row"><button class="btn" id="saveExpenseBtn">Guardar gasto</button></div>
-      <div id="expenseList" class="stack-list"></div>
+      <div id="expenseList" class="list" style="margin-top:14px"></div>
     </article>
-    <div class="dual-cards"><article class="feature-card rose"><h3>Dinero desperdiciado en alcohol y tabaco</h3><strong class="big-value" id="wasteValue">0 COP</strong></article><article class="feature-card sky"><h3>Saldo mensual estimado</h3><strong class="big-value" id="balanceValue">0 COP</strong></article></div>
-  </section>
+  </div>
+</section>
 
-  <section id="visual" class="screen">
-    <div class="screen-top"><button data-home>← Volver a inicio</button><button data-open-menu>Registrar otra categoría</button></div>
-    <div class="screen-title"><h2>Proceso visual</h2><p>Fotos para ver constancia, energía y momentos de cuidado.</p></div>
+<!-- DIARIO -->
+<section id="day" class="screen">
+  <div class="screen-title"><h2>Diario</h2><p>Escribe, ordena y suelta.</p></div>
+  <div class="two-col">
+    <article class="feature-card"><div class="card-head"><h3>Entrada del día</h3></div><label>Título<input id="journalTitle" type="text"/></label><label>Entrada<textarea id="journalBody" rows="4"></textarea></label><div class="button-row"><button class="btn" id="saveJournalBtn">Guardar diario</button></div></article>
+    <article class="feature-card"><div class="card-head"><h3>Cierre del día</h3></div><label>Reflexión<textarea id="reflectionBody" rows="3"></textarea></label><div class="button-row"><button class="btn secondary" id="saveReflectionBtn">Guardar cierre</button></div></article>
+  </div>
+</section>
+
+<section id="visual" class="screen">
+  <div class="screen-title"><h2>Proceso visual</h2><p>Fotos para ver constancia, energía y momentos de cuidado.</p></div>
+  <div class="two-col">
     <article class="feature-card">
-      <h3>📸 Nueva foto</h3>
+      <div class="card-head"><h3>Nueva foto</h3></div>
       <label>Tomar o cargar foto<input id="progressPhotoInput" type="file" accept="image/*" capture="environment"/></label>
       <div class="dual-grid"><label>Tipo<select id="photoType"><option value="calma">Calma / ansiedad superada</option><option value="rutina">Rutina / ejercicio</option><option value="alimentación">Comida o bebida de cuidado</option><option value="orden">Casa ordenada</option><option value="ánimo">Estado de ánimo</option><option value="otro">Otro</option></select></label><label>Estado<select id="photoMood"><option value="orgullosa">Orgullosa</option><option value="tranquila">Tranquila</option><option value="cansada">Cansada</option><option value="ansiosa">Ansiosa</option><option value="reiniciando">Reiniciando</option></select></label></div>
       <label>Nota<input id="photoNote" type="text" placeholder="Ej. hice respiración antes de fumar"/></label>
       <div class="photo-preview hidden" id="photoPreviewBox"><img id="photoPreview" alt="Vista previa"/></div>
       <div class="button-row"><button class="btn" id="savePhotoBtn">Guardar foto</button><button class="btn secondary" id="clearPhotoBtn">Limpiar</button></div>
     </article>
-    <article class="feature-card"><h3>🌱 Galería de avance</h3><div class="visual-stats"><div class="mini-stat-card"><span>Fotos guardadas</span><strong id="photoCount">0</strong></div><div class="mini-stat-card"><span>Último registro</span><strong id="lastPhotoDate">Pendiente</strong></div></div><div id="photoGallery" class="photo-gallery"></div></article>
-  </section>
+    <article class="feature-card"><div class="card-head"><h3>Galería de avance</h3></div><div class="visual-stats"><div class="mini-stat-card"><span>Fotos guardadas</span><strong id="photoCount">0</strong></div><div class="mini-stat-card"><span>Último registro</span><strong id="lastPhotoDate">Pendiente</strong></div></div><div id="photoGallery" class="photo-gallery"></div></article>
+  </div>
+</section>
 
-  <section id="library" class="screen">
-    <div class="screen-top"><button data-home>← Volver a inicio</button><button data-open-menu>Registrar otra categoría</button></div>
-    <div class="screen-title"><h2>Biblioteca</h2><p>Videos, música y podcasts gratuitos para dormir, activarte o volver a ti.</p></div>
-    <article class="feature-card"><h3>🎧 Elegir intención</h3><div class="ritual-grid" id="mediaLibrary"></div></article>
-    <article class="feature-card violet"><h3>✅ Escuchado / practicado</h3><div id="mediaHistory" class="stack-list"></div></article>
-  </section>
+<!-- ANÁLISIS -->
+<section id="dashboard" class="screen">
+  <div class="screen-title"><h2>Análisis</h2><p>Cómo vas, de un vistazo.</p></div>
+  <article class="dashboard-board">
+    <div class="board-kpis">
+      <div class="board-kpi"><span>Ahorro potencial hoy</span><strong id="dbRecovered">0 COP</strong></div><div class="board-kpi"><span>Gasto alcohol</span><strong id="dbAlcohol">0 COP</strong></div><div class="board-kpi"><span>Gasto tabaco</span><strong id="dbSmoke">0 COP</strong></div><div class="board-kpi"><span>Estudio acumulado</span><strong id="dbStudy">0 min</strong></div><div class="board-kpi"><span>Respiraciones</span><strong id="dbBreaths">0</strong></div><div class="board-kpi"><span>Fotos</span><strong id="dbPhotos">0</strong></div><div class="board-kpi"><span>Biblioteca</span><strong id="dbMedia">0</strong></div><div class="board-kpi"><span>Último respaldo</span><strong id="dbBackup">Pendiente</strong></div>
+    </div>
+    <div class="board-charts">
+      <div class="chart-card"><h3>Hábitos más constantes</h3><div id="habitRank" style="margin-top:14px"></div></div>
+      <div class="chart-card"><h3>Cumplimiento de hábitos</h3><div id="habitCompliance" style="margin-top:14px"></div></div>
+      <div class="chart-card"><h3>Constancia · últimos 28 días</h3><div class="heat" id="habitHeat" style="margin-top:14px"></div><div class="heat-legend"><span>hace 4 semanas</span><span>hoy</span></div></div>
+      <div class="chart-card"><h3>Alimentación · 7 días</h3><div id="foodDash" style="margin-top:14px"></div></div>
+      <div class="chart-card"><h3>Movimiento de los últimos 7 días</h3><div class="legend-row"><span><i class="dot dot1"></i>Recuperado</span><span><i class="dot dot2"></i>Gastado</span></div><div id="lineChartWrap"></div></div>
+      <div class="chart-card"><h3>Reducción frente a la meta</h3><div id="habitBars" style="margin-top:14px"></div></div>
+      <div class="chart-card"><h3>Gastos por categoría</h3><div id="expenseBars" style="margin-top:14px"></div></div>
+      <div class="chart-card"><h3>Resumen semanal</h3><div id="weeklySummary" class="sum-list" style="margin-top:8px"></div></div>
+    </div>
+  </article>
+</section>
 
-  <section id="body" class="screen">
-    <div class="screen-top"><button data-home>← Volver a inicio</button><button data-open-menu>Registrar otra categoría</button></div>
-    <div class="screen-title"><h2>Cuerpo</h2><p>Desde casa y sin comprar nada raro.</p></div>
-    <article class="feature-card"><h3>Ejercicio rápido</h3><div class="task-card pastel-yellow"><div><small>20–30 min</small><strong>Rutina de movimiento</strong><p>Movilidad + cardio suave + estiramiento.</p></div><button class="mini-check" id="bodyDoneBtn">✓</button></div><p class="helper-text" id="bodyText"></p></article>
-  </section>
-
-  <section id="study" class="screen">
-    <div class="screen-top"><button data-home>← Volver a inicio</button><button data-open-menu>Registrar otra categoría</button></div>
-    <div class="screen-title"><h2>Estudio</h2><p>Programación, constancia y avance visible.</p></div>
-    <article class="feature-card"><h3>Registrar estudio</h3><label>Tema<input id="studyTopic" type="text" placeholder="Ej. JavaScript funciones"/></label><label>Minutos<input id="studyMinutes" type="number" min="0" step="5"/></label><div class="button-row"><button class="btn" id="saveStudyBtn">Guardar estudio</button></div><p class="helper-text" id="studyText"></p></article>
-  </section>
-
-  <section id="sleep" class="screen">
-    <div class="screen-top"><button data-home>← Volver a inicio</button><button data-open-menu>Registrar otra categoría</button></div>
-    <div class="screen-title"><h2>Sueño y cuidado</h2><p>Insomnio, rutina nocturna y cuidado natural.</p></div>
+<!-- AJUSTES -->
+<section id="backup" class="screen">
+  <div class="screen-title"><h2>Respaldo y apariencia</h2><p>Tus datos personales, bajo tu control.</p></div>
+  <div class="two-col">
     <article class="feature-card">
-      <h3>🌙 Control de sueño</h3>
-      <div class="triple-grid"><label>Hora en que te levantaste<input id="wakeTime" type="time"/></label><label>Hora en que te dormiste<input id="sleepTime" type="time"/></label><label>Meta para dormir<input id="sleepGoal" type="time" value="23:30"/></label></div>
-      <div class="dual-grid"><label>Calidad<select id="sleepQuality"><option value="sin registrar">Sin registrar</option><option value="bien">Bien</option><option value="regular">Regular</option><option value="mal">Mal</option></select></label><label>¿Pantalla en cama?<select id="screenInBed"><option value="no">No</option><option value="sí">Sí</option></select></label></div>
-      <div class="button-row"><button class="btn" id="saveSleepBtn">Guardar sueño</button><button class="btn secondary" id="sleepScoldBtn">Aterrízame</button></div><p id="sleepFeedback" class="helper-text"></p>
-    </article>
-    <article class="feature-card"><h3>🍵 Cuidado natural</h3><div class="dual-grid"><label>Necesito ayuda con<select id="careTopic"><option value="sueño">Sueño</option><option value="ansiedad">Ansiedad</option><option value="cabello">Caída de cabello</option><option value="piel">Piel</option><option value="alimentación">Alimentación</option><option value="energía">Energía</option></select></label><label>Estado de hoy<select id="careState"><option value="normal">Normal</option><option value="cansada">Cansada</option><option value="ansiosa">Ansiosa</option><option value="desordenada">Desordenada</option></select></label></div><div class="button-row"><button class="btn" id="careTipBtn">Dame recomendación</button></div><div class="care-card" id="careTipBox"></div></article>
-  </section>
-
-  <section id="day" class="screen">
-    <div class="screen-top"><button data-home>← Volver a inicio</button><button data-open-menu>Registrar otra categoría</button></div>
-    <div class="screen-title"><h2>Día</h2><p>Escribe, ordena y suelta.</p></div>
-    <article class="feature-card"><h3>Diario</h3><label>Título<input id="journalTitle" type="text"/></label><label>Entrada<textarea id="journalBody" rows="4"></textarea></label><div class="button-row"><button class="btn" id="saveJournalBtn">Guardar diario</button></div></article>
-    <article class="feature-card"><h3>Cierre del día</h3><label>Reflexión<textarea id="reflectionBody" rows="3"></textarea></label><div class="button-row"><button class="btn secondary" id="saveReflectionBtn">Guardar cierre</button></div></article>
-  </section>
-
-  <section id="dashboard" class="screen">
-    <div class="screen-top"><button data-home>← Volver a inicio</button><button data-open-menu>Registrar otra categoría</button></div>
-    <div class="screen-title"><h2>Dashboard</h2><p>Vista general estilo Power BI.</p></div>
-    <article class="dashboard-board">
-      <div class="chart-card"><h3>Movimiento de los últimos 7 días</h3><div class="legend-row"><span><i class="dot dot1"></i> Recuperado</span><span><i class="dot dot2"></i> Desperdiciado</span></div><div id="lineChartWrap"></div></div>
-      <div class="board-kpis">
-        <div class="board-kpi"><span>Ahorro potencial hoy</span><strong id="dbRecovered">0 COP</strong></div><div class="board-kpi"><span>Gasto alcohol</span><strong id="dbAlcohol">0 COP</strong></div><div class="board-kpi"><span>Gasto tabaco</span><strong id="dbSmoke">0 COP</strong></div><div class="board-kpi"><span>Estudio acumulado</span><strong id="dbStudy">0 min</strong></div><div class="board-kpi"><span>Respiraciones</span><strong id="dbBreaths">0</strong></div><div class="board-kpi"><span>Fotos</span><strong id="dbPhotos">0</strong></div><div class="board-kpi"><span>Biblioteca</span><strong id="dbMedia">0</strong></div><div class="board-kpi"><span>Último respaldo</span><strong id="dbBackup">Pendiente</strong></div>
-      </div>
-      <div class="board-charts"><div class="chart-card"><h3>✅ Mis hábitos · más constantes</h3><div id="habitRank"></div></div><div class="chart-card"><h3>Cumplimiento de hábitos</h3><div id="habitCompliance"></div></div><div class="chart-card"><h3>Constancia · últimos 28 días</h3><div class="heat" id="habitHeat"></div><div class="heat-legend"><span>hace 4 semanas</span><span>hoy</span></div></div><div class="chart-card"><h3>Reducción vs meta</h3><div id="habitBars"></div></div><div class="chart-card"><h3>Gastos por categoría</h3><div id="expenseBars"></div></div><div class="chart-card"><h3>Rendimiento semanal</h3><div id="weeklySummary"></div></div></div>
-    </article>
-  </section>
-
-  <section id="backup" class="screen">
-    <div class="screen-top"><button data-home>← Volver a inicio</button><button data-open-menu>Registrar otra categoría</button></div>
-    <div class="screen-title"><h2>Respaldo</h2><p>Tus datos personales, bajo tu control.</p></div>
-    <article class="feature-card">
-      <h3>🗂️ Respaldo completo local</h3>
-      <p class="helper-text">Genera un ZIP con JSON, CSV compatibles con Excel y fotos. No se envía a nadie automáticamente.</p>
+      <div class="card-head"><h3>Respaldo completo</h3></div>
+      <p class="card-sub" style="margin-bottom:14px">Genera un ZIP con JSON, CSV compatibles con Excel y fotos. No se envía a nadie automáticamente.</p>
       <div class="backup-grid"><div><span>JSON</span><strong>Base completa</strong></div><div><span>CSV</span><strong>Excel compatible</strong></div><div><span>Fotos</span><strong>Carpeta FOTOS</strong></div><div><span>Privado</span><strong>Solo en tu dispositivo</strong></div></div>
       <div class="button-row"><button class="btn" id="exportFullBackupBtn">Descargar ZIP completo</button><button class="btn secondary" id="exportJsonOnlyBtn">Descargar solo JSON</button></div>
       <p class="helper-text" id="backupStatus"></p>
     </article>
-  </section>
+    <article class="feature-card">
+      <div class="card-head"><h3>Apariencia</h3></div>
+      <p class="card-sub" style="margin-bottom:14px">Automático sigue el modo de tu teléfono o computador.</p>
+      <div class="seg" id="themeSeg"><button data-theme-pref="auto">Automático</button><button data-theme-pref="light">Claro</button><button data-theme-pref="dark">Oscuro</button></div>
+    </article>
+  </div>
+</section>
 </main>
+</div>
 
-<button class="fab-menu" id="fabMenuBtn"><img src="./goma-icon.png" alt="Goma"/></button>
-<div class="quick-menu hidden" id="quickMenuOverlay"><div class="quick-menu-card"><div class="quick-header"><h3>¿Qué quieres abrir?</h3><button data-close-menu>✕</button></div><div class="quick-grid">
-<button data-goto="home">🏠 Inicio</button><button data-goto="myhabits">✅ Mis hábitos</button><button data-goto="habits">🚨 Reducir</button><button data-goto="calm">🌬️ Calma</button><button data-goto="tasks">📝 Tareas</button><button data-goto="money">💰 Dinero</button><button data-goto="visual">📸 Proceso</button><button data-goto="library">🎧 Biblioteca</button><button data-goto="body">🧘 Cuerpo</button><button data-goto="study">💻 Estudio</button><button data-goto="sleep">🌙 Sueño</button><button data-goto="day">📖 Día</button><button data-goto="dashboard">📊 Dashboard</button><button data-goto="backup">🗂️ Respaldo</button>
-</div></div></div>
-<div class="message-bubble hidden" id="messageBubble"><div class="bubble-head"><span>Mensaje de Goma</span><button id="closeBubble">✕</button></div><p id="bubbleText"></p></div>
+<nav class="tabbar" id="tabbar" aria-label="Navegación"></nav>
+</div>
+
+<button class="fab-menu" id="fabMenuBtn" aria-label="Goma"><img src="./goma-icon.png" alt="Goma"/></button>
+<div class="quick-menu hidden" id="quickMenuOverlay"><div class="sheet"><div class="sheet-head"><h3>Más secciones</h3><button class="icon-btn" data-close-menu aria-label="Cerrar" data-icon="x" data-size="18"></button></div><div class="sheet-list" id="moreList"></div></div></div>
+<div class="message-bubble hidden" id="messageBubble"><div class="bubble-head"><span>Goma</span><button id="closeBubble" aria-label="Cerrar" data-icon="x" data-size="16"></button></div><p id="bubbleText"></p></div>
 <div id="pawLayer"></div><div class="toast" id="toast"></div>
-<script src="./app.js" defer></script>
-<script src="./habits.js" defer></script>
+
+<script src="./app.js?v=3" defer></script>
+<script src="./habits.js?v=3" defer></script>
+<script src="./food.js?v=3" defer></script>
+<script src="./home.js?v=3" defer></script>
+<script src="./nav.js?v=3" defer></script>
 </body></html>
