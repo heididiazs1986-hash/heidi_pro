@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-<meta name="theme-color" content="#a186ee"/>
+<meta name="theme-color" content="#8b5cff"/>
+<script src="./theme.js"></script>
 <title>Heidi, now you</title>
 <link rel="manifest" href="./manifest.json"/>
 <link rel="icon" href="./icon-192.png"/>
@@ -19,7 +20,7 @@
       <p id="todayLabel">Cargando fecha...</p>
     </div>
   </div>
-  <div class="header-status" id="statusPill">Día en construcción</div>
+  <div class="header-actions"><div class="header-status" id="statusPill">Día en construcción</div><button class="theme-btn" id="themeBtn" aria-label="Cambiar a modo oscuro">🌙</button></div>
 </header>
 
 <main class="app-shell">
@@ -40,9 +41,12 @@
       <article class="kpi-card blue"><span>Cigarrillos hoy</span><strong id="kpiCigs">0</strong></article>
       <article class="kpi-card pink"><span>Dinero recuperado hoy</span><strong id="kpiRecovered">0 COP</strong></article>
       <article class="kpi-card mint"><span>Avance título</span><strong id="kpiGoal">0%</strong></article>
+      <article class="kpi-card amber"><span>Hábitos hoy</span><strong id="kpiHabits">0/0</strong></article>
+      <article class="kpi-card fire"><span>Mejor racha</span><strong id="kpiBest">0 día(s)</strong></article>
     </section>
     <section class="module-grid">
-      <button class="module-card habits" data-goto="habits"><span>🚨</span><b>Hábitos</b><small>Alcohol y cigarrillo</small></button>
+      <button class="module-card myhabits" data-goto="myhabits"><span>✅</span><b>Mis hábitos</b><small>Casillas, rachas y metas</small></button>
+      <button class="module-card habits" data-goto="habits"><span>🚨</span><b>Reducir</b><small>Alcohol y cigarrillo</small></button>
       <button class="module-card calm" data-goto="calm"><span>🌬️</span><b>Calma</b><small>Ansiedad y respiración</small></button>
       <button class="module-card tasks" data-goto="tasks"><span>📝</span><b>Tareas</b><small>Casa y trabajo</small></button>
       <button class="module-card money" data-goto="money"><span>💰</span><b>Dinero</b><small>Salario, gastos y ahorro</small></button>
@@ -59,7 +63,7 @@
 
   <section id="habits" class="screen">
     <div class="screen-top"><button data-home>← Volver a inicio</button><button data-open-menu>Registrar otra categoría</button></div>
-    <div class="screen-title"><h2>Hábitos</h2><p>Sin drama, sin mentiras. Reducir también es avanzar.</p></div>
+    <div class="screen-title"><h2>Reducir</h2><p>Alcohol y cigarrillo. Sin drama, sin mentiras: reducir también es avanzar.</p></div>
     <article class="feature-card">
       <h3>Alcohol</h3>
       <label>Consumo de hoy (COP)<input id="alcoholToday" type="number" min="0" step="500" placeholder="0"/></label>
@@ -80,6 +84,41 @@
       </div>
       <div class="button-row"><button class="btn secondary" id="saveSmokeBtn">Guardar cigarrillo</button></div>
       <p class="helper-text" id="smokeFeedback"></p>
+    </article>
+  </section>
+
+  <section id="myhabits" class="screen">
+    <div class="screen-top"><button data-home>← Volver a inicio</button><button data-open-menu>Registrar otra categoría</button></div>
+    <div class="screen-title"><h2>Mis hábitos</h2><p>Marca la casilla, no rompas la racha. Si se rompe, retomamos hoy, sin castigo.</p></div>
+    <div class="stats-grid">
+      <article class="feature-card mini-stat sky"><span>Hoy</span><strong id="mhStatToday">0/0</strong></article>
+      <article class="feature-card mini-stat violet"><span>Esta semana</span><strong id="mhStatWeek">0%</strong></article>
+      <article class="feature-card mini-stat peach"><span>Mejor racha</span><strong id="mhStatBest">—</strong></article>
+      <article class="feature-card mini-stat rose"><span>Este mes</span><strong id="mhStatMonth">0%</strong></article>
+    </div>
+    <article class="feature-card">
+      <h3>✅ Hoy</h3>
+      <div id="habitToday" class="task-card-list"></div>
+    </article>
+    <article class="feature-card">
+      <h3>🗓️ Mi mes</h3>
+      <div class="mh-nav"><button id="mhPrev" aria-label="Mes anterior">‹</button><span id="mhMonthLabel"></span><button id="mhNext" aria-label="Mes siguiente">›</button></div>
+      <div class="hg-wrap" id="habitGrid"></div>
+      <p class="mh-note">Verde: lo marcaste tú. Morado: se marcó solo desde otra sección. Puedes tocar días pasados para completar lo que olvidaste.</p>
+    </article>
+    <article class="feature-card violet">
+      <h3>🏆 Tus hábitos más constantes</h3>
+      <div id="habitInsights"></div>
+    </article>
+    <article class="feature-card">
+      <h3>➕ Nuevo hábito <small class="helper-text" id="mhCount"></small></h3>
+      <label>Nombre<input id="mhName" type="text" placeholder="Ej. Leer 10 minutos" maxlength="40"/></label>
+      <div class="dual-grid">
+        <label>Ícono<select id="mhEmoji"></select></label>
+        <label>Meta por semana<select id="mhGoal"><option value="7">7 días</option><option value="6">6 días</option><option value="5">5 días</option><option value="4">4 días</option><option value="3">3 días</option><option value="2">2 días</option><option value="1">1 día</option></select></label>
+      </div>
+      <label>¿Cómo se marca?<select id="mhLink"></select></label>
+      <div class="button-row"><button class="btn" id="mhAddBtn">Crear hábito</button></div>
     </article>
   </section>
 
@@ -226,7 +265,7 @@
       <div class="board-kpis">
         <div class="board-kpi"><span>Ahorro potencial hoy</span><strong id="dbRecovered">0 COP</strong></div><div class="board-kpi"><span>Gasto alcohol</span><strong id="dbAlcohol">0 COP</strong></div><div class="board-kpi"><span>Gasto tabaco</span><strong id="dbSmoke">0 COP</strong></div><div class="board-kpi"><span>Estudio acumulado</span><strong id="dbStudy">0 min</strong></div><div class="board-kpi"><span>Respiraciones</span><strong id="dbBreaths">0</strong></div><div class="board-kpi"><span>Fotos</span><strong id="dbPhotos">0</strong></div><div class="board-kpi"><span>Biblioteca</span><strong id="dbMedia">0</strong></div><div class="board-kpi"><span>Último respaldo</span><strong id="dbBackup">Pendiente</strong></div>
       </div>
-      <div class="board-charts"><div class="chart-card"><h3>Hábitos vs meta</h3><div id="habitBars"></div></div><div class="chart-card"><h3>Gastos por categoría</h3><div id="expenseBars"></div></div><div class="chart-card"><h3>Rendimiento semanal</h3><div id="weeklySummary"></div></div></div>
+      <div class="board-charts"><div class="chart-card"><h3>✅ Mis hábitos · más constantes</h3><div id="habitRank"></div></div><div class="chart-card"><h3>Cumplimiento de hábitos</h3><div id="habitCompliance"></div></div><div class="chart-card"><h3>Constancia · últimos 28 días</h3><div class="heat" id="habitHeat"></div><div class="heat-legend"><span>hace 4 semanas</span><span>hoy</span></div></div><div class="chart-card"><h3>Reducción vs meta</h3><div id="habitBars"></div></div><div class="chart-card"><h3>Gastos por categoría</h3><div id="expenseBars"></div></div><div class="chart-card"><h3>Rendimiento semanal</h3><div id="weeklySummary"></div></div></div>
     </article>
   </section>
 
@@ -245,9 +284,10 @@
 
 <button class="fab-menu" id="fabMenuBtn"><img src="./goma-icon.png" alt="Goma"/></button>
 <div class="quick-menu hidden" id="quickMenuOverlay"><div class="quick-menu-card"><div class="quick-header"><h3>¿Qué quieres abrir?</h3><button data-close-menu>✕</button></div><div class="quick-grid">
-<button data-goto="home">🏠 Inicio</button><button data-goto="habits">🚨 Hábitos</button><button data-goto="calm">🌬️ Calma</button><button data-goto="tasks">📝 Tareas</button><button data-goto="money">💰 Dinero</button><button data-goto="visual">📸 Proceso</button><button data-goto="library">🎧 Biblioteca</button><button data-goto="body">🧘 Cuerpo</button><button data-goto="study">💻 Estudio</button><button data-goto="sleep">🌙 Sueño</button><button data-goto="day">📖 Día</button><button data-goto="dashboard">📊 Dashboard</button><button data-goto="backup">🗂️ Respaldo</button>
+<button data-goto="home">🏠 Inicio</button><button data-goto="myhabits">✅ Mis hábitos</button><button data-goto="habits">🚨 Reducir</button><button data-goto="calm">🌬️ Calma</button><button data-goto="tasks">📝 Tareas</button><button data-goto="money">💰 Dinero</button><button data-goto="visual">📸 Proceso</button><button data-goto="library">🎧 Biblioteca</button><button data-goto="body">🧘 Cuerpo</button><button data-goto="study">💻 Estudio</button><button data-goto="sleep">🌙 Sueño</button><button data-goto="day">📖 Día</button><button data-goto="dashboard">📊 Dashboard</button><button data-goto="backup">🗂️ Respaldo</button>
 </div></div></div>
 <div class="message-bubble hidden" id="messageBubble"><div class="bubble-head"><span>Mensaje de Goma</span><button id="closeBubble">✕</button></div><p id="bubbleText"></p></div>
 <div id="pawLayer"></div><div class="toast" id="toast"></div>
 <script src="./app.js" defer></script>
+<script src="./habits.js" defer></script>
 </body></html>
